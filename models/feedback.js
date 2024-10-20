@@ -5,6 +5,11 @@ const feedbackSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  user:{
+    type: mongoose.Types.ObjectId,
+    ref:'User',
+    required:true
+  },
   feedback: {
     type: String,
     required: true,
@@ -15,4 +20,4 @@ const feedbackSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("feedback", feedbackSchema);
+module.exports = mongoose.model("Feedback", feedbackSchema);
