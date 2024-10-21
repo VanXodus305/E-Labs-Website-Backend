@@ -4,9 +4,9 @@ const testRoute = require('./routes/test-route');
 const app = express();
 const connect = require('./db/connect');
 
-connect();
-
 dotenv.config();
+
+connect();
 
 app.use('/test', testRoute);
 
