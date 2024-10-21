@@ -1,8 +1,21 @@
 import mongoose from 'mongoose';
 
-export const connect = () => {
-  mongoose
-    .connect('mongodb://localhost:27017/elabs_backend')
-    .then(() => console.log('connected to db'))
-    .catch(() => console.log("can't connect to db"));
-};
+
+const connect = async () => {
+  try {
+    const connectionInstance = await mongoose.connect(
+      `${process.env.MONGODB_URI}/${process.env.DBNAME}`
+    );
+    console.log(
+      "Database Connected Successfully ! ",
+      connectionInstance.connection.host,
+      connectionInstance.connection.name
+    );
+  } catch (error) {
+    console.log(error, "while trying to connect to database !");
+    process.exit(1);
+  }
+}
+
+module.exports = connect;
+

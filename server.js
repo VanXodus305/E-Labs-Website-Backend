@@ -13,6 +13,7 @@ import {
 } from "./lib/auth.js";
 
 dotenv.config();
+
 connect();
 
 app.use(express.urlencoded({ extended: false }));
@@ -47,6 +48,7 @@ app.use(async (req, res, next) => {
 
 app.use("/auth", authRouter);
 app.use("/test", testRoute);
+
 
 app.listen(8080 || process.env.PORT, () =>
   console.log("SERVER STARTED " + process.env.PORT)
