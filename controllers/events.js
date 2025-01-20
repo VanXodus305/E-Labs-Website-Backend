@@ -5,8 +5,16 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 async function addEvent(req, res) {
   try {
-    const { title, description, startDate, endDate, createdBy } = req.body;
-    if (!title || !description || !startDate || !endDate) {
+    const { title, description, startDate, endDate, time, createdBy } =
+      req.body;
+    if (
+      !title ||
+      !description ||
+      !startDate ||
+      !endDate ||
+      !time ||
+      !createdBy
+    ) {
       return res.status(400).json({ error: "Missing fields !" });
     }
 
@@ -26,6 +34,7 @@ async function addEvent(req, res) {
       endDate,
       location,
       createdBy,
+      time,
       image: localFilePath || "",
     });
     await event.save();

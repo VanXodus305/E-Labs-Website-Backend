@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
+import { checkAccess } from "../middlewares/checkAccess.middleware.js";
 
 import {
   addEvent,
@@ -9,7 +10,7 @@ import {
 
 const router = Router();
 
-router.route("/add-event").post(upload.single("image"), addEvent);
+router.route("/add-event").post(checkAccess, upload.single("image"), addEvent);
 router.post("/register-for-event", registerForEvent);
 router.get("/get-events", getEvents);
 
