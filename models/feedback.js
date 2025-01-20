@@ -1,14 +1,14 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const feedbackSchema = new mongoose.Schema({
   id: {
     type: String,
     required: true,
   },
-  user:{
+  user: {
     type: mongoose.Types.ObjectId,
-    ref:'User',
-    required:true
+    ref: "User",
+    required: true,
   },
   feedback: {
     type: String,
