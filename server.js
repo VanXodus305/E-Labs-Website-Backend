@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 import testRoute from "./routes/test-route.js";
 import authRouter from "./routes/auth-route.js";
 import eventRouter from "./routes/event-route.js";
+import feedbackRoute from "./routes/feedback-route.js";
+
 
 const app = express();
 import { connect } from "./db/connect.js";
@@ -47,10 +49,17 @@ app.use(async (req, res, next) => {
   return next();
 });
 
-app.use("/auth", authRouter);
-app.use("/test", testRoute);
-app.use("/events", eventRouter);
-
 app.listen(8000 || process.env.PORT, () =>
   console.log("SERVER STARTED " + (process.env.PORT || 8000))
+
+app.use("/auth", authRouter);
+app.use("/test", testRoute);
+
+app.use("/events", eventRouter);
+
+
+
+app.use("/feedback", feedbackRoute);
+
+
 );
