@@ -39,6 +39,7 @@ export const signUpController = async (req, res) => {
       password: passwordHash,
       username,
       fullName,
+      // role: "admin",
     });
     const token = generateSessionToken();
     const session = await createSession(token, user._id);

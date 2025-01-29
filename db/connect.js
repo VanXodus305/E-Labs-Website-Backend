@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-
-const connect = async () => {
+export const connect = async () => {
   try {
     const connectionInstance = await mongoose.connect(
       `${process.env.MONGODB_URI}/${process.env.DBNAME}`
@@ -15,7 +14,4 @@ const connect = async () => {
     console.log(error, "while trying to connect to database !");
     process.exit(1);
   }
-}
-
-module.exports = connect;
-
+};
