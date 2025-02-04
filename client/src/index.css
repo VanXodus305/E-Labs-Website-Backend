@@ -1,16 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
-@import "tailwindcss";
+/* @import "tailwindcss"; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @config "../tailwind.config.js"; */
 
 #root {
   margin: 0 auto;
   text-align: center;
+  width: 100%;
 }
 
-@theme {
+/* @theme {
   --color-bgColor: #0b1215;
   --color-textColor1: #f7941d;
   --color-textColor2: #f1faee;
-}
+  --font-sans: "Inter", sans-serif;
+  --colors-primary: oklch(0.75 0.15 265);
+} */
 
 @layer base {
   body {
@@ -25,7 +34,6 @@
     background-image: url("https://res.cloudinary.com/dpqdgcipi/image/upload/v1720238432/Background_hxyroh.png");
     background-size: cover;
     font-family: "Varela Round", sans-serif;
-    text: center;
   }
 
   ::-webkit-scrollbar {
