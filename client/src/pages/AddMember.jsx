@@ -1,6 +1,6 @@
 import React from "react";
 import { Input, Image, Autocomplete, AutocompleteItem } from "@heroui/react";
-import { FaCamera } from "react-icons/fa";
+import { FaCamera, FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FileUploader } from "../components/FileUploader";
 
 const designations = [
@@ -110,6 +110,10 @@ const AddMember = () => {
                 isClearable
                 color="warning"
                 classNames={{ label: "text-md" }}
+                startContent={
+                  <FaLinkedinIn className="text-lg text-textColor1" />
+                }
+                type="url"
               ></Input>
               <Input
                 label="GitHub Profile"
@@ -117,6 +121,19 @@ const AddMember = () => {
                 isClearable
                 color="warning"
                 classNames={{ label: "text-md" }}
+                startContent={<FaGithub className="text-lg text-textColor1" />}
+                type="url"
+              ></Input>
+              <Input
+                label="Instagram Profile"
+                variant="bordered"
+                isClearable
+                color="warning"
+                classNames={{ label: "text-md" }}
+                startContent={
+                  <FaInstagram className="text-lg text-textColor1" />
+                }
+                type="url"
               ></Input>
             </div>
 
