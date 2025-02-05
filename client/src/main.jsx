@@ -14,7 +14,9 @@ createRoot(document.getElementById("root")).render(
         <Route
           path="*"
           element={
-            <h1 className="font-bold text-5xl text-textColor1">Not Found</h1>
+            <div className="text-5xl font-bold text-textColor1 h-screen w-full justify-center items-center flex">
+              Not Found
+            </div>
           }
         />
       </Route>
