@@ -26,13 +26,12 @@
     margin: 0;
     padding: 0;
     display: flex;
-    place-items: center;
     overflow: auto;
     min-width: 320px;
     width: 100%;
     min-height: 100vh;
-    background-image: url("https://res.cloudinary.com/dpqdgcipi/image/upload/v1720238432/Background_hxyroh.png");
-    background-size: cover;
+    /* background-image: url("https://res.cloudinary.com/dpqdgcipi/image/upload/v1720238432/Background_hxyroh.png");
+    background-size: cover; */
     font-family: "Varela Round", sans-serif;
   }
 
@@ -42,8 +41,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #935913;
-    border-radius: 50px;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {

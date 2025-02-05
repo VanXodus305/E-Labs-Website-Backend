@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const App = () => {
   return (
-    <div className="text-textColor1">App</div>
-  )
-}
+    <div className="text-5xl h-screen w-full justify-center items-center flex">
+      App
+    </div>
+  );
+};
 
-export default App
+export default App;

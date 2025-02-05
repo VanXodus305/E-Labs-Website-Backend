@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, Image, Autocomplete, AutocompleteItem } from "@heroui/react";
 import { FaCamera } from "react-icons/fa";
-// import { FileUploader } from "../subComponents/FileUploader";
+import { FileUploader } from "../components/FileUploader";
 
 const designations = [
   { label: "Coordinator", value: "coordinator" },
@@ -126,11 +126,11 @@ const AddMember = () => {
               alt="project_logo"
               radius="lg"
             />
-            {/* <FileUploader
+            <FileUploader
               label={"Upload Image"}
               startContent={<FaCamera className="text-neutral-900 text-xl" />}
               accept={"image/*"}
-            /> */}
+            />
           </div>
         </div>
       </div>
