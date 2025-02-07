@@ -1,4 +1,5 @@
 import { Member } from "../models/member.js";
+import { getPriority } from "../utils/util.js";
 
 export async function addMember(req, res) {
   const {
@@ -44,7 +45,7 @@ export async function addMember(req, res) {
       name,
       image: "",
       designation,
-      priority: "",
+      priority: getPriority(designation),
       domain,
     });
 
