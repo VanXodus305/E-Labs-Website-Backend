@@ -57,3 +57,16 @@ export async function addMember(req, res) {
     res.status(500).json({ error: "Failed to add member" });
   }
 }
+
+export async function getMembers(req, res) {
+  try {
+    const members = await Member.find().sort({ priority: -1 });
+    res.status(200).json({
+      message: "fetched members successfully",
+      members,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch members" });
+  }
+}
