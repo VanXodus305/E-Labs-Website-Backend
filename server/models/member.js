@@ -2,10 +2,6 @@ const e = require("express");
 const mongoose = require("mongoose");
 
 const memberSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
