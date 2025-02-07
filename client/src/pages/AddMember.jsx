@@ -1,12 +1,12 @@
-import React from "react";
 import {
-  Input,
-  Image,
   Autocomplete,
   AutocompleteItem,
-  Form,
   Button,
+  Form,
+  Image,
+  Input,
 } from "@heroui/react";
+import React from "react";
 import {
   FaCamera,
   FaEnvelope,
@@ -63,13 +63,16 @@ const AddMember = () => {
   React.useEffect(() => {
     if (submitted) {
       console.log(submitted);
-      // Call backend API to submit data
+      fetch("http://localhost:8000/member/add-member", {
+        method: "POST",
+        body: submitted,
+      });
     }
   }, [submitted]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const data = new FormData(e.currentTarget);
     setSubmitted(data);
   };
 
