@@ -16,12 +16,34 @@ const memberSchema = new mongoose.Schema({
   },
   designation: {
     type: String,
-    enum: ["Coordinator","Assistant Coordinator","Lead", "Assistant Team Lead", "Member"],
+    enum: [
+      "Coordinator",
+      "Assistant Coordinator",
+      "Lead",
+      "Assistant Team Lead",
+      "Member",
+    ],
+    required: true,
+  },
+  priority: {
+    type: Number,
+    enum: [5, 4, 3, 2, 1],
     required: true,
   },
   domain: {
     type: String,
-    enum:["web","java","iot","ui/ux","marketing","graphic design","photography/editing","ar&vr","machine learning","cloud computing"],
+    enum: [
+      "web",
+      "java",
+      "iot",
+      "ui/ux",
+      "marketing",
+      "graphic design",
+      "photography/editing",
+      "ar&vr",
+      "machine learning",
+      "cloud computing",
+    ],
     required: true,
   },
 });
