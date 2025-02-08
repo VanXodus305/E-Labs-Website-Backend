@@ -1,4 +1,4 @@
-import { feedback } from "../models/feedback.js";
+import { Feedback } from "../models/feedback.js";
 import { User } from "../models/user.js";
 import { v4 as uuidv4 } from "uuid";
 
@@ -15,7 +15,7 @@ export const addFeedback = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
 
-    const newFeedback = new feedback({
+    const newFeedback = new Feedback({
       id: uuidv4(),
       user: user,
       comments,
