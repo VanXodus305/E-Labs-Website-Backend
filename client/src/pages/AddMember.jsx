@@ -220,7 +220,7 @@ const AddMember = () => {
                   onChange={handleImageChange}
                 ></Input>
                 <Input
-                  label="Email Address"
+                  label="KIIT Email Address"
                   variant="bordered"
                   isClearable
                   isRequired

@@ -6,6 +6,7 @@ import {
   AutocompleteItem,
   Form,
   Button,
+  Textarea,
 } from "@heroui/react";
 import {
   FaCamera,
@@ -15,32 +16,6 @@ import {
   FaLinkedinIn,
   FaPhoneAlt,
 } from "react-icons/fa";
-
-const designations = [
-  { label: "Coordinator", value: "coordinator" },
-  { label: "Assistant Coordinator", value: "asst_coordinator" },
-  { label: "Domain Lead", value: "domain_lead" },
-  { label: "Assistant Domain Lead", value: "asst_domain_lead" },
-  { label: "Member", value: "member" },
-];
-
-const domains = [
-  { label: "Web Development", value: "web_dev" },
-  { label: "Android Development", value: "android" },
-  { label: "Game Development", value: "game_dev" },
-  { label: "UI/UX", value: "ui_ux" },
-  { label: "Graphic Design", value: "graphic" },
-  { label: "AI/ML", value: "ml" },
-  { label: "AR & VR", value: "ar_vr" },
-  { label: "Java", value: "java" },
-  { label: "IoT & Embedded", value: "iot" },
-  { label: "Cloud Computing", value: "cloud" },
-  { label: "Marketing and PR", value: "marketing" },
-  { label: "Content Writing", value: "content" },
-  { label: "Photography/Video Editing", value: "photography" },
-  { label: "Cyber Security", value: "cyber_sec" },
-  { label: "Data Analytics", value: "data_anal" },
-];
 
 const AddEvent = () => {
   const [submitted, setSubmitted] = React.useState(null);
@@ -78,7 +53,7 @@ const AddEvent = () => {
       <div className="py-20">
         <div className="flex w-full items-center justify-center">
           <h1 className="text-textColor1 text-4xl md:text-5xl font-bold text-center w-full">
-            Member Details
+            Event Details
           </h1>
         </div>
         <div className="mt-10 rounded-xl border-textColor1 border-2 py-16 px-10 flex flex-col items-center justify-center gap-14 overflow-x-hidden w-full">
@@ -102,31 +77,13 @@ const AddEvent = () => {
                   isRequired
                   classNames={{ label: "text-md" }}
                 ></Input>
-                <Autocomplete
-                  label="Designation"
+                <Textarea
+                  label="Description"
                   variant="bordered"
                   color="warning"
-                  name="designation"
-                  isRequired
-                  classNames={{ popoverContent: "dark" }}
-                  inputProps={{
-                    classNames: {
-                      label: "text-md",
-                    },
-                  }}
-                >
-                  {designations.map((item) => (
-                    <AutocompleteItem
-                      key={item.value}
-                      value={item.value}
-                      variant="faded"
-                      color="warning"
-                      classNames={{ title: "text-md" }}
-                    >
-                      {item.label}
-                    </AutocompleteItem>
-                  ))}
-                </Autocomplete>
+                  minRows={1}
+                  classNames={{ label: "text-md" }}
+                ></Textarea>
                 <Autocomplete
                   label="Domain"
                   variant="bordered"
