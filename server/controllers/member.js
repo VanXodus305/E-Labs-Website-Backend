@@ -1,4 +1,4 @@
-import { Member } from "../models/member.js";
+import Member from "../models/member.js";
 import { getPriority } from "../utils/util.js";
 
 export async function addMember(req, res) {
@@ -49,7 +49,7 @@ export async function addMember(req, res) {
       domain,
     });
 
-    await member.save();
+    // await member.save();
 
     return { status: 200 };
   } catch (error) {

@@ -1,5 +1,4 @@
-const e = require("express");
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const memberSchema = new mongoose.Schema({
   name: {
@@ -44,4 +43,5 @@ const memberSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Member", memberSchema);
+const Member = mongoose.model("Member", memberSchema);
+export default Member;
