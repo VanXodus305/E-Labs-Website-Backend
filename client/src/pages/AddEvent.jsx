@@ -4,18 +4,15 @@ import {
   Image,
   Autocomplete,
   AutocompleteItem,
+  TimeInput,
   Form,
   Button,
   Textarea,
+  DateInput,
+  DatePicker,
 } from "@heroui/react";
-import {
-  FaCamera,
-  FaEnvelope,
-  FaGithub,
-  FaInstagram,
-  FaLinkedinIn,
-  FaPhoneAlt,
-} from "react-icons/fa";
+import { FaCamera, FaRegClock } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 
 const AddEvent = () => {
   const [submitted, setSubmitted] = React.useState(null);
@@ -80,15 +77,19 @@ const AddEvent = () => {
                 <Textarea
                   label="Description"
                   variant="bordered"
+                  isClearable
+                  isRequired
+                  name="desc"
                   color="warning"
-                  minRows={1}
+                  minRows={5}
                   classNames={{ label: "text-md" }}
                 ></Textarea>
                 <Autocomplete
-                  label="Domain"
+                  label="Organizer/Instructor"
                   variant="bordered"
                   color="warning"
                   name="domain"
+                  allowsCustomValue
                   isRequired
                   classNames={{ popoverContent: "dark" }}
                   inputProps={{
@@ -97,7 +98,7 @@ const AddEvent = () => {
                     },
                   }}
                 >
-                  {domains
+                  {/* {domains
                     .sort((d1, d2) => d1.label.localeCompare(d2.label))
                     .map((item) => (
                       <AutocompleteItem
@@ -109,43 +110,19 @@ const AddEvent = () => {
                       >
                         {item.label}
                       </AutocompleteItem>
-                    ))}
+                    ))} */}
                 </Autocomplete>
                 <Input
-                  label="LinkedIn Profile"
+                  label="Location"
                   variant="bordered"
+                  isRequired
                   isClearable
-                  name="linkedin"
+                  name="location"
                   color="warning"
                   classNames={{ label: "text-md" }}
                   startContent={
-                    <FaLinkedinIn className="text-lg text-textColor1" />
+                    <FaLocationDot className="text-lg text-textColor1" />
                   }
-                  type="url"
-                ></Input>
-                <Input
-                  label="GitHub Profile"
-                  variant="bordered"
-                  isClearable
-                  name="github"
-                  color="warning"
-                  classNames={{ label: "text-md" }}
-                  startContent={
-                    <FaGithub className="text-lg text-textColor1" />
-                  }
-                  type="url"
-                ></Input>
-                <Input
-                  label="Instagram Profile"
-                  name="instagram"
-                  variant="bordered"
-                  isClearable
-                  color="warning"
-                  classNames={{ label: "text-md" }}
-                  startContent={
-                    <FaInstagram className="text-lg text-textColor1" />
-                  }
-                  type="url"
                 ></Input>
               </div>
 
@@ -154,7 +131,7 @@ const AddEvent = () => {
                   className="object-cover flex min-w-[70px] h-[180px] shadow-lg shadow-textColor1 mb-6 "
                   src={
                     previewUrl ||
-                    "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.webp"
+                    "https://t3.ftcdn.net/jpg/04/60/01/36/360_F_460013622_6xF8uN6ubMvLx0tAJECBHfKPoNOR5cRa.jpg"
                   }
                   alt="project_logo"
                   radius="lg"
@@ -176,32 +153,17 @@ const AddEvent = () => {
                   accept="image/*"
                   onChange={handleImageChange}
                 ></Input>
-                <Input
-                  label="Email Address"
+                <DatePicker
+                  label="Date and Time"
+                  name="date_time"
                   variant="bordered"
-                  isClearable
-                  isRequired
-                  name="email"
                   color="warning"
-                  classNames={{ label: "text-md" }}
-                  startContent={
-                    <FaEnvelope className="text-lg text-textColor1" />
-                  }
-                  type="email"
-                ></Input>
-                <Input
-                  label="Phone Number"
-                  variant="bordered"
-                  isClearable
                   isRequired
-                  name="phone"
-                  color="warning"
-                  classNames={{ label: "text-md" }}
-                  startContent={
-                    <FaPhoneAlt className="text-lg text-textColor1" />
-                  }
-                  type="tel"
-                ></Input>
+                  showMonthAndYearPickers
+                  granularity="minute"
+                  classNames={{ popoverContent: "dark" }}
+                  dateInputClassNames={{ label: "text-md text-left" }}
+                ></DatePicker>
               </div>
             </div>
 
