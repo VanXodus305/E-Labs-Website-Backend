@@ -4,7 +4,7 @@ export function getPriority(priority) {
       return 5;
     case "assistant coordinator":
       return 4;
-    case "Lead":
+    case "lead":
       return 3;
     case "assistant team lead":
       return 2;

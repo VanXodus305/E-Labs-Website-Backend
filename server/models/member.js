@@ -38,6 +38,7 @@ const memberSchema = new mongoose.Schema({
       "ar&vr",
       "machine learning",
       "cloud computing",
+      "cyber security",
     ],
     required: true,
   },

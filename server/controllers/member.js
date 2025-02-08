@@ -1,4 +1,5 @@
 import Member from "../models/member.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { getPriority } from "../utils/util.js";
 
 export async function addMember(req, res) {
@@ -27,29 +28,19 @@ export async function addMember(req, res) {
   }
 
   const file = req.file;
-  console.log(file);
-
-  // {
-  //   fieldname: 'image',
-  //   originalname: 'img.jpg',
-  //   encoding: '7bit',
-  //   mimetype: 'image/jpeg',
-  //   destination: './public/temp',
-  //   filename: 'image-1738942345820-14135539',
-  //   path: 'public\\temp\\image-1738942345820-14135539',
-  //   size: 68272
-  // }
-
   try {
+    const response = await uploadOnCloudinary(file.path);
+    const uploadedFilePath = response?.url;
+
     const member = new Member({
       name,
-      image: "",
+      image: uploadedFilePath,
       designation,
       priority: getPriority(designation),
-      domain,
+      domain: domain.toLowerCase(),
     });
 
-    // await member.save();
+    await member.save();
 
     return { status: 200 };
   } catch (error) {
