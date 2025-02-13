@@ -14,16 +14,7 @@ export async function addMember(req, res) {
     phone,
   } = req.body;
 
-  if (
-    !name ||
-    !designation ||
-    !domain ||
-    // !linkedin ||
-    // !github ||
-    // !instagram ||
-    !email ||
-    !phone
-  ) {
+  if (!name || !designation || !domain || !email || !phone) {
     return res.status(400).json({ error: "Missing fields !" });
   }
 
