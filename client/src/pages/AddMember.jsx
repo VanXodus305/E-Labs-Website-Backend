@@ -1,4 +1,5 @@
 import {
+  Alert,
   Autocomplete,
   AutocompleteItem,
   Button,
@@ -44,6 +45,7 @@ const domains = [
 
 const AddMember = () => {
   const [submitted, setSubmitted] = React.useState(null);
+  const [isError, setIsError] = React.useState(false);
   const [previewUrl, setPreviewUrl] = React.useState(null);
 
   const handleImageChange = (e) => {
@@ -69,8 +71,7 @@ const AddMember = () => {
         });
         const parsedData = await data.json();
         if (parsedData.status !== 200) {
-          alert(parsedData.error);
-          setSubmitted(null);
+          setIsError(true);
         }
       }
     };
@@ -79,7 +80,7 @@ const AddMember = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    const data = Object.fromEntries(new FormData(e.currentTarget));
     setSubmitted(data);
   };
 
@@ -104,7 +105,7 @@ const AddMember = () => {
             <div className="w-full flex flex-row flex-wrap-reverse items-center justify-between gap-10">
               <div className="flex w-full md:w-[50%] flex-col gap-6 items-center justify-center">
                 <Input
-                  label="Name"
+                  label="Full Name"
                   variant="bordered"
                   isClearable
                   name="name"
@@ -281,9 +282,48 @@ const AddMember = () => {
               </Button>
             </div>
             {submitted && (
-              <div className="w-full text-center text-lg font-semibold text-textColor1 -mt-10">
-                Submitted Successfully!
-              </div>
+              <>
+                {isError ? (
+                  <Alert
+                    color={"danger"}
+                    className="w-full -mt-4"
+                    classNames={{ title: "text-base sm:text-lg" }}
+                    radius="lg"
+                    variant="faded"
+                  >
+                    <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
+                      <h1 className="flex text-md sm:text-lg text-left font-semibold">
+                        User Details Already Exist!
+                      </h1>
+                    </div>
+                  </Alert>
+                ) : (
+                  <Alert
+                    color={"success"}
+                    className="w-full  -mt-4"
+                    classNames={{ title: "text-base sm:text-lg" }}
+                    radius="lg"
+                    variant="faded"
+                  >
+                    <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
+                      <h1 className="flex text-md sm:text-lg text-left font-semibold">
+                        Details Submitted Successfully!
+                      </h1>
+                      <Button
+                        variant="shadow"
+                        color="success"
+                        radius="sm"
+                        size="sm"
+                        className="flex"
+                      >
+                        <h1 className="text-wrap text-center font-medium">
+                          Download Virtual ID
+                        </h1>
+                      </Button>
+                    </div>
+                  </Alert>
+                )}
+              </>
             )}
           </Form>
         </div>
