@@ -11,6 +11,7 @@ import {
 import authRouter from "./routes/auth-route.js";
 import eventRouter from "./routes/event-route.js";
 import feedbackRoute from "./routes/feedback-route.js";
+import memberRoute from "./routes/member-route.js";
 import testRoute from "./routes/test-route.js";
 
 const app = express();
