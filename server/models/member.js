@@ -1,14 +1,6 @@
 import mongoose from "mongoose";
 
 const memberSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
   designation: {
     type: String,
     enum: [
@@ -20,11 +12,13 @@ const memberSchema = new mongoose.Schema({
     ],
     required: true,
   },
+
   priority: {
     type: Number,
     enum: [5, 4, 3, 2, 1],
     required: true,
   },
+
   domain: {
     type: String,
     enum: [
@@ -41,6 +35,35 @@ const memberSchema = new mongoose.Schema({
       "cyber security",
     ],
     required: true,
+  },
+
+  name: {
+    type: String,
+    required: true,
+  },
+
+  email: {
+    type: String,
+    required: true,
+  },
+
+  image: {
+    type: String,
+    required: true,
+  },
+
+  // Social Media
+  linkedin: {
+    type: String,
+    required: false,
+  },
+  github: {
+    type: String,
+    required: false,
+  },
+  instagram: {
+    type: String,
+    required: false,
   },
 });
 

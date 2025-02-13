@@ -24,11 +24,15 @@ export async function addMember(req, res) {
     const uploadedFilePath = response?.url;
 
     const member = new Member({
-      name,
-      image: uploadedFilePath,
       designation,
       priority: getPriority(designation),
       domain: domain.toLowerCase(),
+      name,
+      email,
+      image: uploadedFilePath,
+      linkedin,
+      github,
+      instagram,
     });
 
     await member.save();
