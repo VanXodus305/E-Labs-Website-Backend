@@ -12,6 +12,6 @@ export function getPriority(priority) {
       return 1;
 
     default:
-      return 0;
+      return 1;
   }
 }
