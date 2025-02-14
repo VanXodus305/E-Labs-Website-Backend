@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useToPng } from "@hugocxl/react-to-image";
 import {
   Input,
@@ -46,6 +46,9 @@ const domains = [
 const AddMember = () => {
   const [submitted, setSubmitted] = React.useState(null);
   const [previewUrl, setPreviewUrl] = React.useState(null);
+  const [name, setName] = React.useState("");
+  const [domain, setDomain] = React.useState("");
+  const [idCard, setIdCard] = React.useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -55,13 +58,16 @@ const AddMember = () => {
     }
   };
 
-  const [_, convert, ref] = useToPng({
-    // quality: 0.8,
+  const [state, convert] = useToPng({
+    selector: "#id-card",
     onSuccess: (data) => {
       const link = document.createElement("a");
-      link.download = "my-image-name.png";
+      link.download = `${submitted.name}_${submitted.domain}.png`;
       link.href = data;
       link.click();
+    },
+    onError: (error) => {
+      console.error("Error converting to PNG:", error);
     },
   });
 
@@ -74,6 +80,8 @@ const AddMember = () => {
   React.useEffect(() => {
     if (submitted) {
       console.log(submitted);
+      setName(submitted.name);
+      setDomain(submitted.domain);
       // Call backend API to submit data
     }
   }, [submitted]);
@@ -84,25 +92,6 @@ const AddMember = () => {
     setSubmitted(data);
   };
 
-  // const ref = React.useRef();
-
-  // const onButtonClick = useCallback(async () => {
-  //   if (ref.current === null) {
-  //     return;
-  //   }
-
-  //   await toPng(ref.current, { cacheBust: true })
-  //     .then((dataUrl) => {
-  //       const link = document.createElement("a");
-  //       link.download = "my-image-name.png";
-  //       link.href = dataUrl;
-  //       link.click();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [ref]);
-
   return (
     <div className="container mx-auto px-5 h-screen w-full dark">
       <div className="py-20">
@@ -111,16 +100,14 @@ const AddMember = () => {
             Member Details
           </h1>
         </div>
-        <div
-          className="mt-10 rounded-xl border-textColor1 border-2 py-16 px-10 flex flex-col items-center justify-center gap-14 overflow-x-hidden w-full"
-          ref={ref}
-        >
+        <div className="mt-10 rounded-xl border-textColor1 border-2 py-16 px-10 flex flex-col items-center justify-center gap-14 overflow-x-hidden w-full">
           <Form
             className="w-full flex flex-col items-center justify-center gap-14"
             validationBehavior="native"
             onReset={() => {
               setPreviewUrl(null);
               setSubmitted(null);
+              setIdCard(false);
             }}
             onSubmit={onSubmit}
           >
@@ -141,7 +128,7 @@ const AddMember = () => {
                   color="warning"
                   name="designation"
                   isRequired
-                  classNames={{ popoverContent: "dark" }}
+                  classNames={{ popoverContent: "dark font-varela" }}
                   inputProps={{
                     classNames: {
                       label: "text-md",
@@ -166,7 +153,7 @@ const AddMember = () => {
                   color="warning"
                   name="domain"
                   isRequired
-                  classNames={{ popoverContent: "dark" }}
+                  classNames={{ popoverContent: "dark font-varela" }}
                   inputProps={{
                     classNames: {
                       label: "text-md",
@@ -227,12 +214,12 @@ const AddMember = () => {
 
               <div className="flex w-full md:w-[40%] flex-col gap-6 items-center justify-center">
                 <Image
-                  className="object-cover flex min-w-[70px] h-[180px] shadow-lg shadow-textColor1 mb-6 "
+                  className="object-cover flex min-w-[70px] h-[180px] shadow-lg shadow-textColor1 mb-6"
                   src={
                     previewUrl ||
                     "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.webp"
                   }
-                  alt="project_logo"
+                  alt="member_image"
                   radius="lg"
                 />
                 <Input
@@ -303,34 +290,69 @@ const AddMember = () => {
                 Reset
               </Button>
             </div>
-            {submitted && (
-              <Alert
-                color="success"
-                className="w-full  -mt-4"
-                classNames={{ title: "text-base sm:text-lg" }}
-                radius="lg"
-                variant="faded"
-              >
-                <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
-                  <h1 className="flex text-md sm:text-lg text-left font-semibold">
-                    Details Submitted Successfully!
-                  </h1>
-                  <Button
-                    variant="shadow"
-                    color="success"
-                    radius="sm"
-                    size="sm"
-                    className="flex"
-                    onPress={convert}
-                  >
-                    <h1 className="text-wrap text-center font-medium">
-                      Download Virtual ID
-                    </h1>
-                  </Button>
-                </div>
-              </Alert>
-            )}
           </Form>
+
+          {submitted && (
+            <Alert
+              color="success"
+              className="w-full -mt-4"
+              classNames={{ title: "text-base sm:text-lg" }}
+              radius="lg"
+              variant="faded"
+            >
+              <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
+                <h1 className="flex text-md sm:text-lg text-left font-semibold">
+                  Details Submitted Successfully!
+                </h1>
+                <Button
+                  variant="shadow"
+                  color="success"
+                  radius="sm"
+                  size="sm"
+                  className="flex"
+                  onPress={() => {
+                    setIdCard(true), convert();
+                  }}
+                >
+                  <h1 className="text-wrap text-center font-medium">
+                    Download Virtual ID
+                  </h1>
+                </Button>
+              </div>
+            </Alert>
+          )}
+
+          <div
+            className="flex flex-col w-[591px] h-[1004px] items-center justify-between bg-[url(/ID_Card.png)] bg-cover"
+            id="id-card"
+          >
+            <div className="flex w-full h-[54.7%] items-end justify-center">
+              <Image
+                className="object-cover flex object-center aspect-square mb-7"
+                src={
+                  previewUrl ||
+                  "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.webp"
+                }
+                alt="member_image"
+                width={370}
+                radius="full"
+              />
+            </div>
+            <div className="flex w-full h-[45.3%] justify-start items-start pt-8">
+              <div className="w-[72%] h-[55%] flex flex-col gap-6 pl-6">
+                <div className="flex w-full">
+                  <h1 className="text-[28px] font-horizon text-textColor2 text-left">
+                    {name}
+                  </h1>
+                </div>
+                <div className="flex w-full">
+                  <h1 className="text-[22px] font-horizon text-textColor1 text-left">
+                    {domain}
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
