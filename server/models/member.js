@@ -2,10 +2,6 @@ const e = require("express");
 const mongoose = require("mongoose");
 
 const memberSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
@@ -16,14 +12,32 @@ const memberSchema = new mongoose.Schema({
   },
   designation: {
     type: String,
-    enum: ["Coordinator","Assistant Coordinator","Lead", "Assistant Team Lead", "Member"],
+    enum: [
+      "Coordinator",
+      "Assistant Coordinator",
+      "Lead",
+      "Assistant Team Lead",
+      "Member",
+    ],
     required: true,
   },
   domain: {
     type: String,
-    enum:["web","java","iot","ui/ux","marketing","graphic design","photography/editing","ar&vr","machine learning","cloud computing"],
+    enum: [
+      "web",
+      "java",
+      "iot",
+      "ui/ux",
+      "marketing",
+      "graphic design",
+      "photography/editing",
+      "ar&vr",
+      "machine learning",
+      "cloud computing",
+    ],
     required: true,
   },
 });
 
-module.exports = mongoose.model("Member", memberSchema);
+const MongooseSchema = mongoose.model("Member", memberSchema);
+export default MongooseSchema;
