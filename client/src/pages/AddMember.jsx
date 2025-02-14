@@ -1,14 +1,14 @@
-import React, { useCallback } from "react";
-import { useToPng } from "@hugocxl/react-to-image";
 import {
-  Input,
-  Image,
+  Alert,
   Autocomplete,
   AutocompleteItem,
-  Form,
   Button,
-  Alert,
+  Form,
+  Image,
+  Input,
 } from "@heroui/react";
+import { useToPng } from "@hugocxl/react-to-image";
+import React from "react";
 import {
   FaCamera,
   FaEnvelope,
@@ -72,15 +72,26 @@ const AddMember = () => {
   }, [previewUrl]);
 
   React.useEffect(() => {
-    if (submitted) {
-      console.log(submitted);
-      // Call backend API to submit data
-    }
+    const sendData = async function () {
+      if (submitted) {
+        console.log(submitted);
+        const data = await fetch("http://localhost:8000/member/add-member", {
+          method: "POST",
+          body: submitted,
+        });
+        const parsedData = await data.json();
+        if (parsedData.status !== 200) {
+          console.error(parsedData);
+          setSubmitted(null);
+        }
+      }
+    };
+    sendData();
   }, [submitted]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const data = new FormData(e.currentTarget);
     setSubmitted(data);
   };
 
