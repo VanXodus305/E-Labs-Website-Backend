@@ -1,30 +1,22 @@
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import dotenv from "dotenv";
 import express from "express";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import testRoute from "./routes/test-route.js";
+import authRouter from "./routes/auth-route.js";
+import eventRouter from "./routes/event-route.js";
+import feedbackRoute from "./routes/feedback-route.js";
+
+const app = express();
 import { connect } from "./db/connect.js";
 import {
   getCreateSessionCookie,
   getDeleteSessionCookie,
   validateSessionToken,
 } from "./lib/auth.js";
-import authRouter from "./routes/auth-route.js";
-import eventRouter from "./routes/event-route.js";
-import feedbackRoute from "./routes/feedback-route.js";
-import memberRoute from "./routes/member-route.js";
-import testRoute from "./routes/test-route.js";
-
-const app = express();
 
 dotenv.config();
 
 connect();
-
-app.use(
-  cors({
-    origin: "*",
-  })
-);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -66,5 +58,3 @@ app.use("/test", testRoute);
 app.use("/events", eventRouter);
 
 app.use("/feedback", feedbackRoute);
-
-app.use("/member", memberRoute);
