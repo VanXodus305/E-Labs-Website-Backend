@@ -45,6 +45,7 @@ const domains = [
 
 const AddMember = () => {
   const [isError, setIsError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [submitted, setSubmitted] = React.useState(null);
   const [previewUrl, setPreviewUrl] = React.useState(null);
 
@@ -75,6 +76,7 @@ const AddMember = () => {
   React.useEffect(() => {
     const sendData = async function () {
       if (submitted) {
+        setIsLoading(true);
         setIsError(false);
         const data = await fetch("http://localhost:8000/member/add-member", {
           method: "POST",
@@ -86,6 +88,7 @@ const AddMember = () => {
           setSubmitted(null);
           setIsError(true);
         }
+        setIsLoading(false);
       }
     };
     sendData();
@@ -316,7 +319,7 @@ const AddMember = () => {
                 Reset
               </Button>
             </div>
-            {submitted && (
+            {!isError && !isLoading && (
               <Alert
                 color="success"
                 className="w-full  -mt-4"
@@ -343,7 +346,7 @@ const AddMember = () => {
                 </div>
               </Alert>
             )}
-            {isError && (
+            {isError && !isLoading && (
               <Alert
                 color="danger"
                 className="w-full  -mt-4"
