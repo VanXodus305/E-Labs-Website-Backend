@@ -44,6 +44,7 @@ const domains = [
 ];
 
 const AddMember = () => {
+  const [isError, setIsError] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(null);
   const [previewUrl, setPreviewUrl] = React.useState(null);
 
@@ -74,15 +75,16 @@ const AddMember = () => {
   React.useEffect(() => {
     const sendData = async function () {
       if (submitted) {
-        console.log(submitted);
+        setIsError(false);
         const data = await fetch("http://localhost:8000/member/add-member", {
           method: "POST",
           body: submitted,
         });
         const parsedData = await data.json();
-        if (parsedData.status !== 200) {
+        if (data.status !== 200) {
           console.error(parsedData);
           setSubmitted(null);
+          setIsError(true);
         }
       }
     };
@@ -338,6 +340,21 @@ const AddMember = () => {
                       Download Virtual ID
                     </h1>
                   </Button>
+                </div>
+              </Alert>
+            )}
+            {isError && (
+              <Alert
+                color="danger"
+                className="w-full  -mt-4"
+                classNames={{ title: "text-base sm:text-lg" }}
+                radius="lg"
+                variant="faded"
+              >
+                <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
+                  <h1 className="flex text-md sm:text-lg text-left font-semibold">
+                    An Error Occured
+                  </h1>
                 </div>
               </Alert>
             )}
