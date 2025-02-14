@@ -1,29 +1,72 @@
-const e = require("express");
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const memberSchema = new mongoose.Schema({
-  id: {
+  designation: {
     type: String,
+    enum: [
+      "Coordinator",
+      "Assistant Coordinator",
+      "Lead",
+      "Assistant Team Lead",
+      "Member",
+    ],
     required: true,
   },
+
+  priority: {
+    type: Number,
+    enum: [5, 4, 3, 2, 1],
+    required: true,
+  },
+
+  domain: {
+    type: String,
+    enum: [
+      "web",
+      "java",
+      "iot",
+      "ui/ux",
+      "marketing",
+      "graphic design",
+      "photography/editing",
+      "ar&vr",
+      "machine learning",
+      "cloud computing",
+      "cyber security",
+    ],
+    required: true,
+  },
+
   name: {
     type: String,
     required: true,
   },
+
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+
   image: {
     type: String,
     required: true,
   },
-  designation: {
+
+  // Social Media
+  linkedin: {
     type: String,
-    enum: ["Coordinator","Assistant Coordinator","Lead", "Assistant Team Lead", "Member"],
-    required: true,
+    required: false,
   },
-  domain: {
+  github: {
     type: String,
-    enum:["web","java","iot","ui/ux","marketing","graphic design","photography/editing","ar&vr","machine learning","cloud computing"],
-    required: true,
+    required: false,
+  },
+  instagram: {
+    type: String,
+    required: false,
   },
 });
 
-module.exports = mongoose.model("Member", memberSchema);
+const Member = mongoose.model("Member", memberSchema);
+export default Member;

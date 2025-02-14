@@ -1,13 +1,13 @@
-import React from "react";
 import {
-  Input,
-  Image,
+  Alert,
   Autocomplete,
   AutocompleteItem,
-  Form,
   Button,
-  Alert,
+  Form,
+  Image,
+  Input,
 } from "@heroui/react";
+import React from "react";
 import {
   FaCamera,
   FaEnvelope,
@@ -45,6 +45,7 @@ const domains = [
 
 const AddMember = () => {
   const [submitted, setSubmitted] = React.useState(null);
+  const [isError, setIsError] = React.useState(false);
   const [previewUrl, setPreviewUrl] = React.useState(null);
 
   const handleImageChange = (e) => {
@@ -62,10 +63,19 @@ const AddMember = () => {
   }, [previewUrl]);
 
   React.useEffect(() => {
-    if (submitted) {
-      console.log(submitted);
-      // Call backend API to submit data
-    }
+    const sendData = async function () {
+      if (submitted) {
+        const data = await fetch("http://localhost:8000/member/add-member", {
+          method: "POST",
+          body: submitted,
+        });
+        const parsedData = await data.json();
+        if (parsedData.status !== 200) {
+          setIsError(true);
+        }
+      }
+    };
+    sendData();
   }, [submitted]);
 
   const onSubmit = (e) => {
@@ -272,30 +282,48 @@ const AddMember = () => {
               </Button>
             </div>
             {submitted && (
-              <Alert
-                color="success"
-                className="w-full  -mt-4"
-                classNames={{ title: "text-base sm:text-lg" }}
-                radius="lg"
-                variant="faded"
-              >
-                <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
-                  <h1 className="flex text-md sm:text-lg text-left font-semibold">
-                    Details Submitted Successfully!
-                  </h1>
-                  <Button
-                    variant="shadow"
-                    color="success"
-                    radius="sm"
-                    size="sm"
-                    className="flex"
+              <>
+                {isError ? (
+                  <Alert
+                    color={"danger"}
+                    className="w-full -mt-4"
+                    classNames={{ title: "text-base sm:text-lg" }}
+                    radius="lg"
+                    variant="faded"
                   >
-                    <h1 className="text-wrap text-center font-medium">
-                      Download Virtual ID
-                    </h1>
-                  </Button>
-                </div>
-              </Alert>
+                    <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
+                      <h1 className="flex text-md sm:text-lg text-left font-semibold">
+                        User Details Already Exist!
+                      </h1>
+                    </div>
+                  </Alert>
+                ) : (
+                  <Alert
+                    color={"success"}
+                    className="w-full  -mt-4"
+                    classNames={{ title: "text-base sm:text-lg" }}
+                    radius="lg"
+                    variant="faded"
+                  >
+                    <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
+                      <h1 className="flex text-md sm:text-lg text-left font-semibold">
+                        Details Submitted Successfully!
+                      </h1>
+                      <Button
+                        variant="shadow"
+                        color="success"
+                        radius="sm"
+                        size="sm"
+                        className="flex"
+                      >
+                        <h1 className="text-wrap text-center font-medium">
+                          Download Virtual ID
+                        </h1>
+                      </Button>
+                    </div>
+                  </Alert>
+                )}
+              </>
             )}
           </Form>
         </div>
