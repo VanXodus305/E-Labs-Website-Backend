@@ -19,18 +19,6 @@ const memberSchema = new mongoose.Schema({
   },
   domain: {
     type: String,
-    enum: [
-      "web",
-      "java",
-      "iot",
-      "ui/ux",
-      "marketing",
-      "graphic design",
-      "photography/editing",
-      "ar&vr",
-      "machine learning",
-      "cloud computing",
-    ],
     required: true,
   },
   name: {
