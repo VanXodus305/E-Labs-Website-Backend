@@ -1,7 +1,5 @@
 import React, { useCallback } from "react";
-import html2canvas from "html2canvas";
 import { useToPng } from "@hugocxl/react-to-image";
-import { toPng } from "html-to-image";
 import {
   Input,
   Image,
