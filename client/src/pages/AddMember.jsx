@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
+import html2canvas from "html2canvas";
+import { useToPng } from "@hugocxl/react-to-image";
+import { toPng } from "html-to-image";
 import {
   Input,
   Image,
@@ -55,6 +58,16 @@ const AddMember = () => {
     }
   };
 
+  const [_, convert, ref] = useToPng({
+    // quality: 0.8,
+    onSuccess: (data) => {
+      const link = document.createElement("a");
+      link.download = "my-image-name.png";
+      link.href = data;
+      link.click();
+    },
+  });
+
   React.useEffect(() => {
     return () => {
       if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -74,6 +87,25 @@ const AddMember = () => {
     setSubmitted(data);
   };
 
+  // const ref = React.useRef();
+
+  // const onButtonClick = useCallback(async () => {
+  //   if (ref.current === null) {
+  //     return;
+  //   }
+
+  //   await toPng(ref.current, { cacheBust: true })
+  //     .then((dataUrl) => {
+  //       const link = document.createElement("a");
+  //       link.download = "my-image-name.png";
+  //       link.href = dataUrl;
+  //       link.click();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [ref]);
+
   return (
     <div className="container mx-auto px-5 h-screen w-full dark">
       <div className="py-20">
@@ -82,7 +114,10 @@ const AddMember = () => {
             Member Details
           </h1>
         </div>
-        <div className="mt-10 rounded-xl border-textColor1 border-2 py-16 px-10 flex flex-col items-center justify-center gap-14 overflow-x-hidden w-full">
+        <div
+          className="mt-10 rounded-xl border-textColor1 border-2 py-16 px-10 flex flex-col items-center justify-center gap-14 overflow-x-hidden w-full"
+          ref={ref}
+        >
           <Form
             className="w-full flex flex-col items-center justify-center gap-14"
             validationBehavior="native"
@@ -289,6 +324,7 @@ const AddMember = () => {
                     radius="sm"
                     size="sm"
                     className="flex"
+                    onPress={convert}
                   >
                     <h1 className="text-wrap text-center font-medium">
                       Download Virtual ID
