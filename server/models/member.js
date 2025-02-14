@@ -1,5 +1,4 @@
-const e = require("express");
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const memberSchema = new mongoose.Schema({
   designation: {
