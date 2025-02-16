@@ -90,7 +90,7 @@ const AddMember = () => {
         setDomain(displayData.domain);
         setIsLoading(true);
         setIsError(false);
-        const data = await fetch("http://https://e-labs-backend-server.onrender.com/member/add-member", {
+        const data = await fetch("https://e-labs-backend-server.onrender.com/member/add-member", {
           method: "POST",
           body: submitted,
         });
