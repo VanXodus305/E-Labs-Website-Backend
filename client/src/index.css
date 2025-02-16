@@ -13,6 +13,13 @@
   width: 100%;
 }
 
+@font-face {
+  font-family: "Horizon";
+  src: url("/fonts/horizon.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* @theme {
   --color-bgColor: #0b1215;
   --color-textColor1: #f7941d;
@@ -30,7 +37,7 @@
     min-width: 320px;
     width: 100%;
     min-height: 100vh;
-    font-family: "Varela Round", sans-serif;
+    /* font-family: "Varela Round", sans-serif; */
   }
 
   ::-webkit-scrollbar {

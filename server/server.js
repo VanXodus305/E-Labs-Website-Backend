@@ -26,11 +26,9 @@ app.use(
 dotenv.config();
 
 connect();
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-
 // auth middleware
 app.use(async (req, res, next) => {
   const token = req.cookies.session;
@@ -39,9 +37,7 @@ app.use(async (req, res, next) => {
     res.locals.session = null;
     return next();
   }
-
   const { session, user } = await validateSessionToken(token);
-
   if (session === null) {
     res.appendHeader("Set-Cookie", getDeleteSessionCookie());
     res.locals.session = null;
@@ -56,14 +52,11 @@ app.use(async (req, res, next) => {
   res.locals.user = user;
   return next();
 });
-
 app.listen(8000 || process.env.PORT, () =>
   console.log("SERVER STARTED " + (process.env.PORT || 8000))
 );
-
 app.use("/auth", authRouter);
 app.use("/test", testRoute);
-
 app.use("/events", eventRouter);
 
 app.use("/feedback", feedbackRoute);
