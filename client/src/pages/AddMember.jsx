@@ -45,11 +45,13 @@ const domains = [
 ];
 
 const AddMember = () => {
+  const [isError, setIsError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [submitted, setSubmitted] = React.useState(null);
+  const [displayData, setDisplayData] = React.useState(null);
   const [previewUrl, setPreviewUrl] = React.useState(null);
   const [name, setName] = React.useState("");
   const [domain, setDomain] = React.useState("");
-  const [idCard, setIdCard] = React.useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -65,7 +67,7 @@ const AddMember = () => {
     height: 1004,
     onSuccess: (data) => {
       const link = document.createElement("a");
-      link.download = `${submitted.name}_${submitted.domain}.png`;
+      link.download = `${name}_${domain}.png`;
       link.href = data;
       link.click();
     },
@@ -81,25 +83,40 @@ const AddMember = () => {
   }, [previewUrl]);
 
   React.useEffect(() => {
-    if (submitted) {
-      console.log(submitted);
-      setName(submitted.name);
-      setDomain(submitted.domain);
-      setIdCard(true);
-      // Call backend API to submit data
-    }
+    const sendData = async function () {
+      if (submitted) {
+        console.log(displayData);
+        setName(displayData.name);
+        setDomain(displayData.domain);
+        setIsLoading(true);
+        setIsError(false);
+        const data = await fetch("http://https://e-labs-backend-server.onrender.com/member/add-member", {
+          method: "POST",
+          body: submitted,
+        });
+        const parsedData = await data.json();
+        if (data.status !== 200) {
+          console.error(parsedData);
+          setSubmitted(null);
+          setIsError(true);
+        }
+        setIsLoading(false);
+      }
+    };
+    sendData();
   }, [submitted]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const data = new FormData(e.currentTarget);
+    const dspData = Object.fromEntries(new FormData(e.currentTarget));
     setSubmitted(data);
-    setIdCard(true);
+    setDisplayData(dspData);
   };
 
   return (
     <div className="container mx-auto px-5 h-screen w-full dark">
-      {idCard ? (
+      {!isError && !isLoading ? (
         <div className="py-20">
           <div className="flex w-full items-center justify-center">
             <h1 className="text-textColor1 text-4xl md:text-5xl font-bold text-center w-full">
@@ -115,7 +132,7 @@ const AddMember = () => {
               variant="faded"
               isClosable
               onClose={() => {
-                setSubmitted(null), setIdCard(false), setPreviewUrl(null);
+                setSubmitted(null), setPreviewUrl(null), setIsLoading(true);
               }}
             >
               <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
@@ -144,6 +161,33 @@ const AddMember = () => {
                 "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.webp"
               }
             />
+          </div>
+        </div>
+      ) : isError && !isLoading ? (
+        <div className="py-20">
+          <div className="flex w-full items-center justify-center">
+            <h1 className="text-textColor1 text-4xl md:text-5xl font-bold text-center w-full">
+              Member Details
+            </h1>
+          </div>
+          <div className="mt-10 rounded-xl border-textColor1 border-2 pb-6 pt-6 px-6 flex flex-col items-center justify-start gap-14 overflow-x-hidden w-full">
+            <Alert
+              color="danger"
+              className="w-full"
+              classNames={{ title: "text-base sm:text-lg" }}
+              radius="lg"
+              variant="faded"
+              isClosable
+              onClose={() => {
+                setSubmitted(null), setPreviewUrl(null), setIsLoading(true);
+              }}
+            >
+              <div className="flex w-full flex-row flex-wrap justify-between gap-2 items-center">
+                <h1 className="flex text-md sm:text-lg text-left font-semibold">
+                  Error Submitting Details! Please try again.
+                </h1>
+              </div>
+            </Alert>
           </div>
         </div>
       ) : (
