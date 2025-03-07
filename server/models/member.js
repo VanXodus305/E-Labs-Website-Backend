@@ -18,7 +18,7 @@ const memberSchema = new mongoose.Schema({
     required: true,
   },
   domain: {
-    type: String,
+    type: [String],
     required: true,
   },
   name: {
