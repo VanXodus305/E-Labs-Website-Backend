@@ -222,7 +222,10 @@ const AddMember = () => {
                     name="name"
                     color="warning"
                     isRequired
-                    classNames={{ label: "text-md" }}
+                    classNames={{
+                      label: "text-md",
+                      errorMessage: "text-left text-[13px]",
+                    }}
                   ></Input>
                   <Autocomplete
                     label="Designation"
@@ -230,10 +233,13 @@ const AddMember = () => {
                     color="warning"
                     name="designation"
                     isRequired
-                    classNames={{ popoverContent: "dark font-varela" }}
+                    classNames={{
+                      popoverContent: "dark font-varela",
+                    }}
                     inputProps={{
                       classNames: {
                         label: "text-md",
+                        errorMessage: "text-left text-[13px]",
                       },
                     }}
                     scrollShadowProps={{
@@ -256,12 +262,15 @@ const AddMember = () => {
                     label="Domain"
                     variant="bordered"
                     color="warning"
+                    description="Select all domains that you belong to"
                     name="domain"
                     selectionMode="multiple"
                     isRequired
                     classNames={{
                       popoverContent: "dark font-varela",
                       label: "text-md",
+                      errorMessage: "text-left text-[13px]",
+                      description: "text-left text-[13px]",
                     }}
                     scrollShadowProps={{
                       hideScrollBar: false,
@@ -321,7 +330,7 @@ const AddMember = () => {
 
                 <div className="flex w-full md:w-[40%] flex-col gap-6 items-center justify-center">
                   <Image
-                    className="object-cover flex min-w-[70px] h-[180px] shadow-lg shadow-textColor1 mb-6"
+                    className="object-cover flex aspect-square h-[180px] shadow-lg shadow-textColor1 mb-6"
                     src={
                       previewUrl ||
                       "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.webp"
@@ -334,11 +343,16 @@ const AddMember = () => {
                     isRequired
                     name="image"
                     variant="flat"
+                    description="Max size: 10 MB"
                     size="lg"
                     labelPlacement="outside"
                     isClearable
                     color="warning"
-                    classNames={{ label: "text-md" }}
+                    classNames={{
+                      label: "text-md",
+                      description: "text-left text-[13px]",
+                      errorMessage: "text-left text-[13px]",
+                    }}
                     startContent={
                       <FaCamera className="text-lg text-textColor1" />
                     }
@@ -353,7 +367,10 @@ const AddMember = () => {
                     isRequired
                     name="email"
                     color="warning"
-                    classNames={{ label: "text-md" }}
+                    classNames={{
+                      label: "text-md",
+                      errorMessage: "text-left text-[13px]",
+                    }}
                     startContent={
                       <FaEnvelope className="text-lg text-textColor1" />
                     }
@@ -366,7 +383,10 @@ const AddMember = () => {
                     isRequired
                     name="phone"
                     color="warning"
-                    classNames={{ label: "text-md" }}
+                    classNames={{
+                      label: "text-md",
+                      errorMessage: "text-left text-[13px]",
+                    }}
                     startContent={
                       <FaPhoneAlt className="text-lg text-textColor1" />
                     }
