@@ -8,6 +8,8 @@ import {
   Form,
   Button,
   Alert,
+  Select,
+  SelectItem,
 } from "@heroui/react";
 import {
   FaCamera,
@@ -109,7 +111,11 @@ const AddMember = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const dspData = Object.fromEntries(new FormData(e.currentTarget));
+    const dspData = Object.fromEntries(data);
+    dspData.domain = data.getAll("domain").map((value) => {
+      const domain = domains.find((d) => d.value === value);
+      return domain ? domain.label : value;
+    });
     setSubmitted(data);
     setDisplayData(dspData);
   };
@@ -230,6 +236,9 @@ const AddMember = () => {
                         label: "text-md",
                       },
                     }}
+                    scrollShadowProps={{
+                      hideScrollBar: false,
+                    }}
                   >
                     {designations.map((item) => (
                       <AutocompleteItem
@@ -243,33 +252,35 @@ const AddMember = () => {
                       </AutocompleteItem>
                     ))}
                   </Autocomplete>
-                  <Autocomplete
+                  <Select
                     label="Domain"
                     variant="bordered"
                     color="warning"
                     name="domain"
+                    selectionMode="multiple"
                     isRequired
-                    classNames={{ popoverContent: "dark font-varela" }}
-                    inputProps={{
-                      classNames: {
-                        label: "text-md",
-                      },
+                    classNames={{
+                      popoverContent: "dark font-varela",
+                      label: "text-md",
+                    }}
+                    scrollShadowProps={{
+                      hideScrollBar: false,
                     }}
                   >
                     {domains
                       .sort((d1, d2) => d1.label.localeCompare(d2.label))
                       .map((item) => (
-                        <AutocompleteItem
+                        <SelectItem
                           key={item.value}
-                          value={item.value}
                           color="warning"
+                          value={item.value}
                           variant="faded"
                           classNames={{ title: "text-md" }}
                         >
                           {item.label}
-                        </AutocompleteItem>
+                        </SelectItem>
                       ))}
-                  </Autocomplete>
+                  </Select>
                   <Input
                     label="LinkedIn Profile"
                     variant="bordered"

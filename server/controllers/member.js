@@ -26,7 +26,7 @@ export async function addMember(req, res) {
     const member = new Member({
       designation,
       priority: getPriority(designation),
-      domain: domain.toLowerCase(),
+      domain,
       name,
       email,
       image: uploadedFilePath,
