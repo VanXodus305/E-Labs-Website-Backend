@@ -10,6 +10,7 @@ import {
   Alert,
   Select,
   SelectItem,
+  Spinner,
 } from "@heroui/react";
 import {
   FaCamera,
@@ -50,6 +51,7 @@ const AddMember = () => {
   const [isError, setIsError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const [submitted, setSubmitted] = React.useState(null);
+  const [clicked, setClicked] = React.useState(false);
   const [displayData, setDisplayData] = React.useState(null);
   const [previewUrl, setPreviewUrl] = React.useState(null);
   const [name, setName] = React.useState("");
@@ -87,7 +89,6 @@ const AddMember = () => {
   React.useEffect(() => {
     const sendData = async function () {
       if (submitted) {
-        console.log(displayData);
         setName(displayData.name);
         setDomain(displayData.domain);
         setIsLoading(true);
@@ -103,12 +104,14 @@ const AddMember = () => {
           setIsError(true);
         }
         setIsLoading(false);
+        setClicked(false);
       }
     };
     sendData();
   }, [submitted]);
 
   const onSubmit = (e) => {
+    setClicked(true);
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const dspData = Object.fromEntries(data);
@@ -169,7 +172,7 @@ const AddMember = () => {
             />
           </div>
         </div>
-      ) : isError && !isLoading ? (
+      ) : isError && !isLoading && !setClicked ? (
         <div className="py-20">
           <div className="flex w-full items-center justify-center">
             <h1 className="text-textColor1 text-4xl md:text-5xl font-bold text-center w-full">
@@ -400,9 +403,11 @@ const AddMember = () => {
                   className="w-full max-w-[250px] hover:scale-105 transition-all ease-in-out duration-200 font-bold text-xl"
                   type="submit"
                   variant="shadow"
+                  isDisabled={clicked}
                   color="warning"
                   radius="lg"
                   size="lg"
+                  startContent={clicked && <Spinner color="default" variant="gradient" />}
                 >
                   Submit
                 </Button>
@@ -411,6 +416,7 @@ const AddMember = () => {
                   type="reset"
                   variant="faded"
                   radius="lg"
+                  isDisabled={clicked}
                   color="warning"
                   size="lg"
                 >
