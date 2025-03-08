@@ -24,8 +24,8 @@ import { toast } from "sonner";
 const designations = [
   { label: "Coordinator", value: "coordinator" },
   { label: "Assistant Coordinator", value: "asst_coordinator" },
-  { label: "Domain Lead", value: "domain_lead" },
-  { label: "Assistant Domain Lead", value: "asst_domain_lead" },
+  { label: "Lead", value: "lead" },
+  { label: "Assistant Lead", value: "asst_lead" },
   { label: "Member", value: "member" },
 ];
 
