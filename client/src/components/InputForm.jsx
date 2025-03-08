@@ -149,7 +149,7 @@ function ImageInput() {
   return (
     <>
       <Image
-        className="object-cover flex aspect-square h-[180px] shadow-lg shadow-textColor1 mb-6"
+        className="object-cover flex aspect-square h-[174px] shadow-lg shadow-textColor1 mb-6"
         src={
           previewUrl ||
           "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.webp"
@@ -306,8 +306,13 @@ export default function InputForm() {
 
       if (data.status !== 200) {
         addToast({
-          title: "Failed to create member. Please try again later",
+          title: "Failed to submit. Please try again.",
           color: "danger",
+          className: "dark",
+          classNames: {
+            title: "font-varela text-left",
+          },
+          radius: "lg",
           onClose: () => {
             window.location.reload();
           },
@@ -315,7 +320,12 @@ export default function InputForm() {
         setSubmittedData(null);
       } else {
         addToast({
-          title: "Member created successfully!",
+          title: "Submitted Successfully!",
+          className: "dark",
+          classNames: {
+            title: "font-varela text-left",
+          },
+          radius: "lg",
           endContent: (
             <Button
               variant="shadow"
@@ -325,11 +335,15 @@ export default function InputForm() {
                 navigate(`/user/${parsedData.userId}`);
               }}
             >
-              Download
+              <div className="w-full">
+                <h1 className="text-sm font-medium font-varela leading-tight text-wrap">
+                  Download Virtual ID
+                </h1>
+              </div>
             </Button>
           ),
           color: "success",
-          timeout: 60_000,
+          timeout: 60000,
           onClose: () => {
             window.location.reload();
           },
@@ -349,7 +363,7 @@ export default function InputForm() {
   };
 
   return (
-    <div className="py-20">
+    <div>
       <div className="py-20">
         <div className="flex w-full items-center justify-center">
           <h1 className="text-textColor1 text-4xl md:text-5xl font-bold text-center w-full">
@@ -379,7 +393,7 @@ export default function InputForm() {
               </div>
             </div>
 
-            <div className="flex w-full items-center justify-center flex-col md:flex-row gap-10">
+            <div className="flex w-full items-center justify-center flex-wrap flex-row gap-10">
               <ActionButtons isLoading={isLoading} />
             </div>
           </Form>

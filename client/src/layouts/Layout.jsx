@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 const Layout = () => {
   return (
     <HeroUIProvider>
-      <ToastProvider placement="top-right" />
+      <ToastProvider placement="top-right" toastOffset={10} maxVisibleToasts={1}/>
 
       <div className="overflow-x-hidden antialiased text-textColor2 selection:bg-textColor1 selection:text-textColor2 font-varela">
         <div className="fixed top-0 -z-10 h-full w-full">
