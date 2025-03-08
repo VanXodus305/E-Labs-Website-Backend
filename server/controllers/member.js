@@ -35,9 +35,11 @@ export async function addMember(req, res) {
       instagram,
     });
 
-    await member.save();
+    const data = await member.save();
 
-    res.status(200).json({ status: 200 });
+    res.status(200).json({
+      userId: data._id.toString(),
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to add member" });
