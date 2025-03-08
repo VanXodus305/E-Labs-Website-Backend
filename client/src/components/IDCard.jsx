@@ -1,7 +1,33 @@
-import React from "react";
 import { Image } from "@heroui/react";
+import { useToPng } from "@hugocxl/react-to-image";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 const IDCard = ({ name, domain, url }) => {
+  const navigate = useNavigate();
+  const [state, convert] = useToPng({
+    selector: "#id-card",
+    width: 590,
+    height: 1004,
+    onSuccess: (data) => {
+      const link = document.createElement("a");
+      link.download = `${name}_${domain}.png`;
+      link.href = data;
+      link.click();
+    },
+    onError: (error) => {
+      toast.error("Error converting to PNG:", error);
+    },
+  });
+
+  useEffect(() => {
+    if (convert) {
+      convert();
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div
       className="flex flex-col w-[591px] h-[1004px] items-center justify-between bg-[url(/ID_Card.png)] bg-cover hover:shadow-2xl hover:shadow-textColor1 duration-200 ease-in-out transition-all"
