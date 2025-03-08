@@ -1,32 +1,25 @@
 import { Image } from "@heroui/react";
-import { useToPng } from "@hugocxl/react-to-image";
-import { useEffect } from "react";
+import html2canvas from "html2canvas";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { toast } from "sonner";
 
 const IDCard = ({ name, domain, url }) => {
   const navigate = useNavigate();
-  const [state, convert] = useToPng({
-    selector: "#id-card",
-    width: 590,
-    height: 1004,
-    onSuccess: (data) => {
-      const link = document.createElement("a");
-      link.download = `${name}_${domain}.png`;
-      link.href = data;
-      link.click();
-    },
-    onError: (error) => {
-      toast.error("Error converting to PNG:", error);
-    },
-  });
+  const [hasImageLoaded, setHasImageLoaded] = useState(false);
 
   useEffect(() => {
-    if (convert) {
-      convert();
+    if (hasImageLoaded) {
+      html2canvas(document.getElementById("id-card"), {
+        useCORS: true,
+      }).then((canvas) => {
+        const link = document.createElement("a");
+        link.download = `${name}_E-LABS.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+      });
       navigate("/");
     }
-  }, []);
+  }, [hasImageLoaded]);
 
   return (
     <div
@@ -35,7 +28,12 @@ const IDCard = ({ name, domain, url }) => {
     >
       <div className="flex w-full h-[54.7%] items-end justify-center">
         <Image
+          crossOrigin="anonymous"
           className="object-cover flex object-center aspect-square mb-7"
+          fetchpriority="high"
+          onLoad={() => {
+            setHasImageLoaded(true);
+          }}
           src={url}
           alt="member_image"
           width={370}
