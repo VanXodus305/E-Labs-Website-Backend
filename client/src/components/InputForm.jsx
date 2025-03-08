@@ -308,8 +308,14 @@ export default function InputForm() {
         toast.error("Failed to create member. Please try again later");
         setSubmittedData(null);
       } else {
-        toast.success("Member created successfully!");
-        navigate(`/user/${parsedData.userId}`);
+        toast.success("Member created successfully!", {
+          action: {
+            label: "Download Card",
+            onClick: () => {
+              navigate(`/user/${parsedData.userId}`);
+            },
+          },
+        });
       }
 
       setIsLoading(false);
