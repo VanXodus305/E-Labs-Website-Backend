@@ -9,7 +9,6 @@ import {
   SelectItem,
   Spinner,
 } from "@heroui/react";
-
 import {
   FaCamera,
   FaEnvelope,
@@ -18,6 +17,7 @@ import {
   FaLinkedinIn,
   FaPhoneAlt,
 } from "react-icons/fa";
+import { toast } from "sonner";
 
 import { useEffect, useState } from "react";
 
@@ -294,6 +294,21 @@ export default function InputForm() {
 
     const sendRequest = async () => {
       setIsLoading(true);
+
+      const data = await fetch(import.meta.env.VITE_MEMBER_URI, {
+        method: "POST",
+        body: submittedData,
+      });
+
+      const parsedData = await data.json();
+      console.log(parsedData);
+
+      if (data.status !== 200) {
+        toast.error("Failed to create member. Please try again later");
+        setSubmittedData(null);
+      } else {
+        toast.success("Member created successfully!");
+      }
 
       setIsLoading(false);
     };
