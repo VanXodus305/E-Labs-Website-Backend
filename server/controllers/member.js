@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import Member from "../models/member.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { getPriority } from "../utils/util.js";
@@ -35,9 +36,11 @@ export async function addMember(req, res) {
       instagram,
     });
 
-    await member.save();
+    const data = await member.save();
 
-    res.status(200).json({ status: 200 });
+    res.status(200).json({
+      userId: data._id.toString(),
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to add member" });
@@ -54,5 +57,17 @@ export async function getMembers(req, res) {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch members" });
+  }
+}
+
+export async function getMemberDetails(req, res) {
+  try {
+    const member = await Member.findById(new ObjectId(req.body.userId));
+    res.status(200).json({
+      member,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch member" });
   }
 }

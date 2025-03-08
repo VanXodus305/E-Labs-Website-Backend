@@ -1,5 +1,3 @@
-import React from "react";
-
 const App = () => {
   return (
     <div className="text-5xl text-textColor1 h-screen w-full justify-center items-center flex flex-col gap-4">
