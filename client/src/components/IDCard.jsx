@@ -17,7 +17,7 @@ const IDCard = ({ name, designation, url }) => {
         link.href = canvas.toDataURL();
         link.click();
       });
-      navigate("/");
+      navigate("/addmember");
     }
   }, [hasImageLoaded]);
 
@@ -29,7 +29,7 @@ const IDCard = ({ name, designation, url }) => {
       <div className="flex w-full h-[54.7%] items-end justify-center">
         <Image
           crossOrigin="anonymous"
-          className="object-cover flex object-center aspect-square mb-7 ml-7"
+          className="object-cover flex object-center aspect-square mb-7"
           fetchpriority="low"
           onLoad={() => {
             setHasImageLoaded(true);

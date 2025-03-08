@@ -1,7 +1,6 @@
-import { Spinner } from "@heroui/react";
+import { addToast, Spinner } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { toast } from "sonner";
 import IDCard from "../components/IDCard";
 
 export default function User() {
@@ -23,8 +22,13 @@ export default function User() {
       });
       const parsedData = await data.json();
       if (data.status !== 200) {
-        toast.error("Failed to fetch member. Please try again later");
-        navigate("/");
+        addToast({
+          title: "Failed to fetch member. Please try again later",
+          color: "danger",
+          onClose: () => {
+            navigate("/");
+          },
+        });
       } else {
         setUserData({
           name: parsedData.member.name,

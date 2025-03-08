@@ -1,11 +1,10 @@
-import { HeroUIProvider } from "@heroui/react";
+import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import { Outlet } from "react-router";
-import { Toaster } from "sonner";
 
 const Layout = () => {
   return (
     <HeroUIProvider>
-      <Toaster richColors />
+      <ToastProvider placement="top-right" />
 
       <div className="overflow-x-hidden antialiased text-textColor2 selection:bg-textColor1 selection:text-textColor2 font-varela">
         <div className="fixed top-0 -z-10 h-full w-full">
