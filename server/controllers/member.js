@@ -1,7 +1,7 @@
+import { ObjectId } from "mongodb";
 import Member from "../models/member.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { getPriority } from "../utils/util.js";
-import { ObjectId } from "mongodb";
 
 export async function addMember(req, res) {
   const {
@@ -63,7 +63,6 @@ export async function getMembers(req, res) {
 export async function getMemberDetails(req, res) {
   try {
     const member = await Member.findById(new ObjectId(req.body.userId));
-    console.log(member);
     res.status(200).json({
       member,
     });
