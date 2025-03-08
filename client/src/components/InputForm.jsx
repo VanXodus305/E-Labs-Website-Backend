@@ -379,7 +379,7 @@ export default function InputForm() {
               </div>
             </div>
 
-            <div className="flex w-full items-center justify-center gap-10">
+            <div className="flex w-full items-center justify-center flex-col md:flex-row gap-10">
               <ActionButtons isLoading={isLoading} />
             </div>
           </Form>
