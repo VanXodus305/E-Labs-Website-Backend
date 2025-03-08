@@ -1,4 +1,5 @@
 import {
+  addToast,
   Autocomplete,
   AutocompleteItem,
   Button,
@@ -19,7 +20,6 @@ import {
   FaPhoneAlt,
 } from "react-icons/fa";
 import { useNavigate } from "react-router";
-import { toast } from "sonner";
 
 const designations = [
   { label: "Coordinator", value: "coordinator" },
@@ -305,15 +305,33 @@ export default function InputForm() {
       const parsedData = await data.json();
 
       if (data.status !== 200) {
-        toast.error("Failed to create member. Please try again later");
+        addToast({
+          title: "Failed to create member. Please try again later",
+          color: "danger",
+          onClose: () => {
+            window.location.reload();
+          },
+        });
         setSubmittedData(null);
       } else {
-        toast.success("Member created successfully!", {
-          action: {
-            label: "Download Card",
-            onClick: () => {
-              navigate(`/user/${parsedData.userId}`);
-            },
+        addToast({
+          title: "Member created successfully!",
+          endContent: (
+            <Button
+              variant="shadow"
+              color="success"
+              className="dark"
+              onPress={() => {
+                navigate(`/user/${parsedData.userId}`);
+              }}
+            >
+              Download
+            </Button>
+          ),
+          color: "success",
+          timeout: 60_000,
+          onClose: () => {
+            window.location.reload();
           },
         });
       }
