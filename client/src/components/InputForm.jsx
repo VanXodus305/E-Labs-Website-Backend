@@ -253,6 +253,38 @@ function ConnectionsInput() {
   );
 }
 
+function ActionButtons({ isLoading }) {
+  return (
+    <>
+      <Button
+        className="w-full max-w-[250px] hover:scale-105 transition-all ease-in-out duration-200 font-bold text-xl"
+        type="submit"
+        variant="shadow"
+        isDisabled={isLoading}
+        color="warning"
+        radius="lg"
+        size="lg"
+        startContent={
+          isLoading && <Spinner color="default" variant="gradient" />
+        }
+      >
+        Submit
+      </Button>
+      <Button
+        className="w-full max-w-[250px] hover:scale-105 transition-all ease-in-out duration-200 font-bold text-xl"
+        type="reset"
+        variant="faded"
+        radius="lg"
+        isDisabled={isLoading}
+        color="warning"
+        size="lg"
+      >
+        Reset
+      </Button>
+    </>
+  );
+}
+
 export default function InputForm() {
   const [submittedData, setSubmittedData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -307,31 +339,7 @@ export default function InputForm() {
             </div>
 
             <div className="flex w-full items-center justify-center gap-10">
-              <Button
-                className="w-full max-w-[250px] hover:scale-105 transition-all ease-in-out duration-200 font-bold text-xl"
-                type="submit"
-                variant="shadow"
-                isDisabled={isLoading}
-                color="warning"
-                radius="lg"
-                size="lg"
-                startContent={
-                  isLoading && <Spinner color="default" variant="gradient" />
-                }
-              >
-                Submit
-              </Button>
-              <Button
-                className="w-full max-w-[250px] hover:scale-105 transition-all ease-in-out duration-200 font-bold text-xl"
-                type="reset"
-                variant="faded"
-                radius="lg"
-                isDisabled={isLoading}
-                color="warning"
-                size="lg"
-              >
-                Reset
-              </Button>
+              <ActionButtons isLoading={isLoading} />
             </div>
           </Form>
         </div>
