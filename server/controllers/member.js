@@ -1,6 +1,7 @@
 import Member from "../models/member.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { getPriority } from "../utils/util.js";
+import { ObjectId } from "mongodb";
 
 export async function addMember(req, res) {
   const {
@@ -56,5 +57,18 @@ export async function getMembers(req, res) {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch members" });
+  }
+}
+
+export async function getMemberDetails(req, res) {
+  try {
+    const member = await Member.findById(new ObjectId(req.body.userId));
+    console.log(member);
+    res.status(200).json({
+      member,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch member" });
   }
 }
