@@ -5,6 +5,7 @@ import "./index.css";
 import Layout from "./layouts/Layout.jsx";
 import AddEvent from "./pages/AddEvent.jsx";
 import AddMember from "./pages/AddMember.jsx";
+import User from "./pages/User.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -13,6 +14,7 @@ createRoot(document.getElementById("root")).render(
         {/* <Route path="/" element={<App />} /> */}
         <Route path="addmember" element={<AddMember />}></Route>
         <Route path="addevent" element={<AddEvent />}></Route>
+        <Route path="/user/:userId" element={<User />}></Route>
         <Route
           path="*"
           element={
