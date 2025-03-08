@@ -1,7 +1,7 @@
 import React from "react";
 import { Image } from "@heroui/react";
 
-const IDCard = ({ name, domain, url }) => {
+const IDCard = ({ name, subText, url }) => {
   return (
     <div
       className="flex flex-col w-[591px] h-[1004px] items-center justify-between bg-[url(/ID_Card.png)] bg-cover hover:shadow-2xl hover:shadow-textColor1 duration-200 ease-in-out transition-all"
@@ -25,7 +25,7 @@ const IDCard = ({ name, domain, url }) => {
           </div>
           <div className="flex w-full">
             <h1 className="text-[22px] font-horizon text-textColor1 text-left">
-              {domain}
+              {subText}
             </h1>
           </div>
         </div>

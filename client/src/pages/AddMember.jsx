@@ -25,8 +25,8 @@ import IDCard from "../components/IDCard";
 const designations = [
   { label: "Coordinator", value: "coordinator" },
   { label: "Assistant Coordinator", value: "asst_coordinator" },
-  { label: "Domain Lead", value: "domain_lead" },
-  { label: "Assistant Domain Lead", value: "asst_domain_lead" },
+  { label: "Lead", value: "domain_lead" },
+  { label: "Assistant Lead", value: "asst_domain_lead" },
   { label: "Member", value: "member" },
 ];
 
@@ -55,7 +55,7 @@ const AddMember = () => {
   const [displayData, setDisplayData] = React.useState(null);
   const [previewUrl, setPreviewUrl] = React.useState(null);
   const [name, setName] = React.useState("");
-  const [domain, setDomain] = React.useState("");
+  const [subText, setSubText] = React.useState("");
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -71,7 +71,7 @@ const AddMember = () => {
     height: 1004,
     onSuccess: (data) => {
       const link = document.createElement("a");
-      link.download = `${name}_${domain}.png`;
+      link.download = `${name}.png`;
       link.href = data;
       link.click();
     },
@@ -90,7 +90,7 @@ const AddMember = () => {
     const sendData = async function () {
       if (submitted) {
         setName(displayData.name);
-        setDomain(displayData.domain);
+        setSubText(displayData.designation);
         setIsLoading(true);
         setIsError(false);
         const data = await fetch(import.meta.env.VITE_MEMBER_URI, {
@@ -164,7 +164,7 @@ const AddMember = () => {
             </Alert>
             <IDCard
               name={name}
-              domain={domain}
+              subText={subText}
               url={
                 previewUrl ||
                 "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.webp"
@@ -407,7 +407,9 @@ const AddMember = () => {
                   color="warning"
                   radius="lg"
                   size="lg"
-                  startContent={clicked && <Spinner color="default" variant="gradient" />}
+                  startContent={
+                    clicked && <Spinner color="default" variant="gradient" />
+                  }
                 >
                   Submit
                 </Button>

@@ -6,7 +6,7 @@ export function getPriority(designation) {
       return 4;
     case "Lead":
       return 3;
-    case "Assistant Team Lead":
+    case "Assistant Lead":
       return 2;
     case "Member":
       return 1;

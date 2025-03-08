@@ -6,8 +6,8 @@ const memberSchema = new mongoose.Schema({
     enum: [
       "Coordinator",
       "Assistant Coordinator",
-      "Domain Lead",
-      "Assistant Domain Lead",
+      "Lead",
+      "Assistant Lead",
       "Member",
     ],
     required: true,
