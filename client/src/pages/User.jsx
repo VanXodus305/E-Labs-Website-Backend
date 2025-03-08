@@ -28,7 +28,7 @@ export default function User() {
       } else {
         setUserData({
           name: parsedData.member.name,
-          domain: parsedData.member.domain,
+          designation: parsedData.member.designation,
           image: parsedData.member.image,
         });
       }
@@ -44,7 +44,7 @@ export default function User() {
       {!isLoading ? (
         <IDCard
           name={userData.name}
-          domain={userData.domain}
+          designation={userData.designation}
           url={userData.image}
         />
       ) : (

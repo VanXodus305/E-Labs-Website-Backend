@@ -3,7 +3,7 @@ import html2canvas from "html2canvas";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-const IDCard = ({ name, domain, url }) => {
+const IDCard = ({ name, designation, url }) => {
   const navigate = useNavigate();
   const [hasImageLoaded, setHasImageLoaded] = useState(false);
 
@@ -30,7 +30,7 @@ const IDCard = ({ name, domain, url }) => {
         <Image
           crossOrigin="anonymous"
           className="object-cover flex object-center aspect-square mb-7"
-          fetchpriority="high"
+          fetchpriority="low"
           onLoad={() => {
             setHasImageLoaded(true);
           }}
@@ -49,7 +49,7 @@ const IDCard = ({ name, domain, url }) => {
           </div>
           <div className="flex w-full">
             <h1 className="text-[22px] font-horizon text-textColor1 text-left">
-              {domain}
+              {designation}
             </h1>
           </div>
         </div>
