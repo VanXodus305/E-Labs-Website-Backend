@@ -9,6 +9,7 @@ import {
   SelectItem,
   Spinner,
 } from "@heroui/react";
+import { useEffect, useState } from "react";
 import {
   FaCamera,
   FaEnvelope,
@@ -17,9 +18,8 @@ import {
   FaLinkedinIn,
   FaPhoneAlt,
 } from "react-icons/fa";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
-
-import { useEffect, useState } from "react";
 
 const designations = [
   { label: "Coordinator", value: "coordinator" },
@@ -286,6 +286,8 @@ function ActionButtons({ isLoading }) {
 }
 
 export default function InputForm() {
+  const navigate = useNavigate();
+
   const [submittedData, setSubmittedData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -301,13 +303,13 @@ export default function InputForm() {
       });
 
       const parsedData = await data.json();
-      console.log(parsedData);
 
       if (data.status !== 200) {
         toast.error("Failed to create member. Please try again later");
         setSubmittedData(null);
       } else {
         toast.success("Member created successfully!");
+        navigate(`/user/${parsedData.userId}`);
       }
 
       setIsLoading(false);
