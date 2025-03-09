@@ -23,35 +23,42 @@ const IDCard = ({ name, designation, url }) => {
 
   return (
     <div
-      className="flex flex-col w-[591px] h-[1004px] items-center justify-between bg-[url(/ID_Card.png)] bg-cover hover:shadow-2xl hover:shadow-textColor1 duration-200 ease-in-out transition-all"
       id="id-card"
+      className="relative bg-black z-0 aspect-square w-[591px] h-[1004px] "
     >
-      <div className="flex w-full h-[54.7%] items-end justify-center">
+      <div className="absolute inset-0 -z-50">
         <Image
           crossOrigin="anonymous"
-          className="object-cover flex object-center aspect-square mb-7"
+          fetchpriority="high"
+          src="/ID_Card.png"
+          alt="ID Card"
+          width={591}
+          height={1004}
+          className="w-full h-full"
+        />
+      </div>
+      <div className="top-[9.27rem] left-32 absolute z-50">
+        <Image
+          crossOrigin="anonymous"
+          className="object-cover flex object-center aspect-square"
           fetchpriority="low"
           onLoad={() => {
             setHasImageLoaded(true);
           }}
           src={url}
-          alt="member_image"
+          alt="member profile image"
           width={370}
           radius="full"
         />
       </div>
-      <div className="flex w-full h-[45.3%] justify-start items-start pt-8">
-        <div className="w-[72%] h-[55%] flex flex-col gap-6 pl-6">
-          <div className="flex w-full">
-            <h1 className="text-[28px] font-horizon text-textColor2 text-left">
-              {name}
-            </h1>
-          </div>
-          <div className="flex w-full">
-            <h1 className="text-[22px] font-horizon text-textColor1 text-left">
-              {designation}
-            </h1>
-          </div>
+      <div>
+        <div className="absolute top-[40rem] left-3 flex flex-col gap-6">
+          <h1 className="text-[28px] font-horizon text-textColor2 text-left">
+            {name}
+          </h1>
+          <h1 className="text-[22px] font-horizon text-textColor1 text-left">
+            {designation}
+          </h1>
         </div>
       </div>
     </div>
