@@ -37,7 +37,7 @@ const IDCard = ({ name, designation, url }) => {
           className="w-full h-full"
         />
       </div>
-      <div className="top-[10rem] left-32 absolute z-50">
+      <div className="top-[9.8rem] left-32 absolute z-50">
         <Image
           crossOrigin="anonymous"
           className="object-cover flex object-center aspect-square"
@@ -47,12 +47,12 @@ const IDCard = ({ name, designation, url }) => {
           }}
           src={url}
           alt="member profile image"
-          width={350}
+          width={355}
           radius="full"
         />
       </div>
       <div>
-        <div className="absolute top-[36rem] left-3 flex flex-col gap-6 w-[60%] pl-6">
+        <div className="absolute top-[34rem] left-3 flex flex-col gap-6 w-[65%] pl-4">
           <h1 className="text-[28px] font-horizon text-textColor2 text-left">
             {name}
           </h1>

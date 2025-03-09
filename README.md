@@ -2,8 +2,9 @@
 
 Team Members Involved :
 
-1. Md. Asif Nawaz ( Asst. Lead )
-2. Sarthak
-3. Shreyansh Singh
-4. Vaibhav
-5. Jagadish Prasad Mohanty
+1. Md. Asif Nawaz (Lead)
+2. Soumyadeep Kundu (Asst. Lead)
+3. Sarthak
+4. Shreyash Singh
+5. Vaibhav
+6. Jagadish Prasad Mohanty
