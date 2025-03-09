@@ -52,7 +52,7 @@ const IDCard = ({ name, designation, url }) => {
         />
       </div>
       <div>
-        <div className="absolute top-[34rem] left-3 flex flex-col gap-6 w-[65%] pl-4">
+        <div className="absolute top-[35rem] left-3 flex flex-col gap-6 w-[65%] pl-4">
           <h1 className="text-[28px] font-horizon text-textColor2 text-left">
             {name}
           </h1>
