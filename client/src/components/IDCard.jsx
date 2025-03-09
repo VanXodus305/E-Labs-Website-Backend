@@ -17,7 +17,9 @@ const IDCard = ({ name, designation, url }) => {
         link.href = canvas.toDataURL();
         link.click();
       });
-      navigate("/addmember");
+      setTimeout(() => {
+        navigate("/addmember");
+      }, 2000);
     }
   }, [hasImageLoaded]);
 
