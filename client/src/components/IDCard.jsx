@@ -12,14 +12,16 @@ const IDCard = ({ name, designation, url }) => {
       html2canvas(document.getElementById("id-card"), {
         useCORS: true,
       }).then((canvas) => {
-        const link = document.createElement("a");
-        link.download = `${name}_E-LABS.png`;
-        link.href = canvas.toDataURL();
-        link.click();
+        setTimeout(() => {
+          const link = document.createElement("a");
+          link.download = `${name}_E-LABS.png`;
+          link.href = canvas.toDataURL();
+          link.click();
+        }, 2000);
       });
       setTimeout(() => {
         navigate("/addmember");
-      }, 2000);
+      }, 3000);
     }
   }, [hasImageLoaded]);
 

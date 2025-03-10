@@ -22,10 +22,10 @@ import {
 import { useNavigate } from "react-router";
 
 const designations = [
-  { label: "Coordinator", value: "coordinator" },
-  { label: "Assistant Coordinator", value: "asst_coordinator" },
-  { label: "Lead", value: "lead" },
-  { label: "Assistant Lead", value: "asst_lead" },
+  // { label: "Coordinator", value: "coordinator" },
+  // { label: "Assistant Coordinator", value: "asst_coordinator" },
+  // { label: "Lead", value: "lead" },
+  // { label: "Assistant Lead", value: "asst_lead" },
   { label: "Member", value: "member" },
 ];
 
