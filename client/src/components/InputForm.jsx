@@ -181,6 +181,7 @@ function SocialsInput() {
         variant="bordered"
         isClearable
         name="linkedin"
+        placeholder="https://www.linkedin.com/in/username"
         color="warning"
         classNames={{ label: "text-md" }}
         startContent={<FaLinkedinIn className="text-lg text-textColor1" />}
@@ -190,6 +191,7 @@ function SocialsInput() {
         label="GitHub Profile"
         variant="bordered"
         isClearable
+        placeholder="https://github.com/username"
         name="github"
         color="warning"
         classNames={{ label: "text-md" }}
@@ -201,6 +203,7 @@ function SocialsInput() {
         name="instagram"
         variant="bordered"
         isClearable
+        placeholder="https://www.instagram.com/username"
         color="warning"
         classNames={{ label: "text-md" }}
         startContent={<FaInstagram className="text-lg text-textColor1" />}
@@ -385,7 +388,7 @@ export default function InputForm() {
               </div>
             </div>
 
-            <div className="flex w-full items-center justify-center flex-wrap flex-row gap-10">
+            <div className="flex w-full items-center justify-center flex-wrap flex-row gap-8">
               <ActionButtons isLoading={isLoading} />
             </div>
           </Form>
