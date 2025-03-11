@@ -5,25 +5,24 @@ import { useNavigate } from "react-router";
 
 const IDCard = ({ name, designation, url }) => {
   const navigate = useNavigate();
-  const [hasImageLoaded, setHasImageLoaded] = useState(false);
+  const [hasProfileImageLoaded, setHasProfileImageLoaded] = useState(false);
+  const [hasBackgroundLoaded, setHasBackgroundLoaded] = useState(false);
 
   useEffect(() => {
-    if (hasImageLoaded) {
+    if (hasProfileImageLoaded && hasBackgroundLoaded) {
       html2canvas(document.getElementById("id-card"), {
         useCORS: true,
       }).then((canvas) => {
-        setTimeout(() => {
-          const link = document.createElement("a");
-          link.download = `${name}_E-LABS.png`;
-          link.href = canvas.toDataURL();
-          link.click();
-        }, 2000);
+        const link = document.createElement("a");
+        link.download = `${name}_E-LABS.png`;
+        link.href = canvas.toDataURL();
+        link.click();
       });
       setTimeout(() => {
         navigate("/addmember");
       }, 3000);
     }
-  }, [hasImageLoaded]);
+  }, [hasProfileImageLoaded, hasBackgroundLoaded]);
 
   return (
     <div
@@ -34,6 +33,9 @@ const IDCard = ({ name, designation, url }) => {
         <Image
           crossOrigin="anonymous"
           fetchpriority="high"
+          onLoad={() => {
+            setHasBackgroundLoaded(true);
+          }}
           src="/ID_Card.png"
           alt="ID Card"
           width={591}
@@ -47,7 +49,7 @@ const IDCard = ({ name, designation, url }) => {
           className="object-cover flex object-center aspect-square"
           fetchpriority="low"
           onLoad={() => {
-            setHasImageLoaded(true);
+            setHasProfileImageLoaded(true);
           }}
           src={url}
           alt="member profile image"
