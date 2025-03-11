@@ -20,7 +20,7 @@ const IDCard = ({ name, designation, url }) => {
       });
       setTimeout(() => {
         navigate("/addmember");
-      }, 3000);
+      }, 2000);
     }
   }, [hasProfileImageLoaded, hasBackgroundLoaded]);
 
