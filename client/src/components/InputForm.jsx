@@ -1,7 +1,5 @@
 import {
   addToast,
-  Autocomplete,
-  AutocompleteItem,
   Button,
   Form,
   Image,
@@ -65,7 +63,7 @@ function NameInput() {
 
 function DesignationInput() {
   return (
-    <Autocomplete
+    <Select
       label="Designation"
       variant="bordered"
       color="warning"
@@ -73,29 +71,24 @@ function DesignationInput() {
       isRequired
       classNames={{
         popoverContent: "dark font-varela",
-      }}
-      inputProps={{
-        classNames: {
-          label: "text-md",
-          errorMessage: "text-left text-[13px]",
-        },
+        label: "text-md",
+        errorMessage: "text-left text-[13px]",
       }}
       scrollShadowProps={{
         hideScrollBar: false,
       }}
     >
       {designations.map((item) => (
-        <AutocompleteItem
-          key={item.value}
-          value={item.value}
+        <SelectItem
+          key={item.label}
           variant="faded"
           color="warning"
           classNames={{ title: "text-md" }}
         >
           {item.label}
-        </AutocompleteItem>
+        </SelectItem>
       ))}
-    </Autocomplete>
+    </Select>
   );
 }
 
@@ -125,7 +118,6 @@ function DomainInput() {
           <SelectItem
             key={item.value}
             color="warning"
-            value={item.value}
             variant="faded"
             classNames={{ title: "text-md" }}
           >
