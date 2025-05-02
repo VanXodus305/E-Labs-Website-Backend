@@ -6,12 +6,13 @@ import Layout from "./layouts/Layout.jsx";
 import AddEvent from "./pages/AddEvent.jsx";
 import AddMember from "./pages/AddMember.jsx";
 import User from "./pages/User.jsx";
+import AdminPanel from "./pages/AdminPanel.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
-        {/* <Route path="/" element={<App />} /> */}
+        <Route path="/" element={<AdminPanel />} />
         <Route path="addmember" element={<AddMember />}></Route>
         <Route path="addevent" element={<AddEvent />}></Route>
         <Route path="/user/:userId" element={<User />}></Route>
