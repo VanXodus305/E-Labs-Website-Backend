@@ -12,11 +12,10 @@ createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
-        {/* <Route path="/" element={<App />} /> */}
+        <Route path="/" element={<AdminPanel />} />
         <Route path="addmember" element={<AddMember />}></Route>
         <Route path="addevent" element={<AddEvent />}></Route>
         <Route path="/user/:userId" element={<User />}></Route>
-        <Route path="admin" element={<AdminPanel />} />
         <Route
           path="*"
           element={
