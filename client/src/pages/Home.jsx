@@ -26,7 +26,7 @@ const Home   = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0B1215] text-white flex items-center justify-center px-20 py-10">
+    <div className="w-full h-screen mx-auto text-white flex items-center justify-center px-20 py-10 container ">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-5xl w-full">
         {cards.map((card, index) => (
           <div
