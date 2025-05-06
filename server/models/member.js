@@ -49,8 +49,8 @@ const memberSchema = new mongoose.Schema({
 
 const MongooseSchema = mongoose.model("Member", memberSchema);
 MongooseSchema.collection.getIndexes().then((indexes) => {
-  console.log("Current indexes for Member collection: ");
-  console.log(indexes);
+  // console.log("Current indexes for Member collection: ");
+  // console.log(indexes);
 });
 
 export default MongooseSchema;

@@ -21,4 +21,10 @@ const feedbackSchema = new mongoose.Schema({
   // },
 });
 
-export const Feedback = mongoose.model("Feedback", feedbackSchema);
+const MongooseSchema = mongoose.model("Feedback", feedbackSchema);
+MongooseSchema.collection.getIndexes().then((indexes) => {
+  // console.log("Current indexes for Feedback collection: ");
+  // console.log(indexes);
+});
+
+export default MongooseSchema;

@@ -1,4 +1,4 @@
-import { Feedback } from "../models/feedback.js";
+import Feedback from "../models/feedback.js";
 // import { User } from "../models/user.js";
 // import { v4 as uuidv4 } from "uuid";
 
