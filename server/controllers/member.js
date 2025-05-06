@@ -20,6 +20,10 @@ export async function addMember(req, res) {
   }
 
   const file = req.file;
+  if (!file) {
+    return res.status(400).json({ error: "File is required." });
+  }
+
   try {
     const response = await uploadOnCloudinary(file.path);
     const uploadedFilePath = response?.url.replace(
@@ -42,6 +46,7 @@ export async function addMember(req, res) {
     const data = await member.save();
 
     res.status(200).json({
+      message: "Member added successfully.",
       userId: data._id.toString(),
     });
   } catch (error) {
@@ -54,7 +59,7 @@ export async function getMembers(req, res) {
   try {
     const members = await Member.find().sort({ priority: -1 });
     res.status(200).json({
-      message: "fetched members successfully",
+      message: "Fetched members successfully",
       members,
     });
   } catch (error) {
