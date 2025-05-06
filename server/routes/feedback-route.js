@@ -1,26 +1,28 @@
 // routes/feedback.js
-import express from "express";
+import Router from "express";
 
-import { validateSessionToken } from "../lib/auth.js";
-import { addFeedback } from "../controllers/feedback.js";
+// import { validateSessionToken } from "../lib/auth.js";
+import { addFeedback, getFeedback } from "../controllers/feedback.js";
+// import { get } from "mongoose";
 
-const router = express.Router();
+const router = Router();
 
-router.use(async (req, res, next) => {
-  const token = req.cookies.session;
-  if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
+// router.use(async (req, res, next) => {
+//   const token = req.cookies.session;
+//   if (!token) {
+//     return res.status(401).json({ message: "Unauthorized" });
+//   }
 
-  const { session, user } = await validateSessionToken(token);
-  if (!session) {
-    return res.status(401).json({ message: "Session expired" });
-  }
+//   const { session, user } = await validateSessionToken(token);
+//   if (!session) {
+//     return res.status(401).json({ message: "Session expired" });
+//   }
 
-  res.locals.user = user;
-  next();
-});
+//   res.locals.user = user;
+//   next();
+// });
 
 router.post("/add-feedback", addFeedback);
+router.get("/get-feedback", getFeedback);
 
 export default router;
