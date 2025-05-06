@@ -1,18 +1,17 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import "./index.css";
-// import App from "./App.jsx";
 import Layout from "./layouts/Layout.jsx";
 import AddEvent from "./pages/AddEvent.jsx";
 import AddMember from "./pages/AddMember.jsx";
 import User from "./pages/User.jsx";
-import AdminPanel from "./pages/AdminPanel.jsx";
+import Home from "./pages/Home.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/" element={<AdminPanel />} />
+        <Route path="/" element={<Home />} />
         <Route path="addmember" element={<AddMember />}></Route>
         <Route path="addevent" element={<AddEvent />}></Route>
         <Route path="/user/:userId" element={<User />}></Route>

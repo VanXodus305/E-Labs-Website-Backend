@@ -1,27 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const AdminPanel = () => {
+const Home   = () => {
   const cards = [
     {
       title: "Add Member",
-      image: "../Screenshot 2025-05-02 165216.png",
+      image: "/Member-Icon.png",
       link: "/addmember",
     },
     {
       title: "Add Event",
-      image: "../Screenshot 2025-05-02 165227.png",
+      image: "/Event-Icon.png",
       link: "/addevent",
     },
     {
       title: "Add Photos",
-      image: "../Screenshot 2025-05-02 165238.png",
-      link: "/members",
+      image: "/Photo-Icon.png",
+      link: "/photos",
     },
     {
       title: "Add Projects",
-      image: "../Screenshot 2025-05-02 165248.png",
-      link: "/events",
+      image: "/Project-Icon.png",
+      link: "/projects",
     },
   ];
 
@@ -51,4 +51,4 @@ const AdminPanel = () => {
   );
 };
 
-export default AdminPanel;
+export default Home;
