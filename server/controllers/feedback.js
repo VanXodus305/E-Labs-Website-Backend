@@ -2,10 +2,10 @@ import Feedback from "../models/feedback.js";
 // import { User } from "../models/user.js";
 // import { v4 as uuidv4 } from "uuid";
 
-export const addFeedback = async (req, res) => {
-  const { userId, comments } = req.body;
+export async function addFeedback(req, res) {
+  const { user, feedback } = req.body;
 
-  if (!userId || !comments) {
+  if (!user || !feedback) {
     return res.status(400).json({ message: "Missing fields." });
   }
 
@@ -17,8 +17,8 @@ export const addFeedback = async (req, res) => {
 
     const newFeedback = new Feedback({
       // id: uuidv4(),
-      user: userId,
-      comments,
+      user,
+      feedback,
     });
 
     const data = await newFeedback.save();
@@ -34,9 +34,9 @@ export const addFeedback = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Failed to add feedback" });
   }
-};
+}
 
-export const getFeedback = async (req, res) => {
+export async function getFeedback(req, res) {
   try {
     const feedback = await Feedback.find();
     res.status(200).json({
@@ -45,6 +45,6 @@ export const getFeedback = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to fetch feedbac." });
+    res.status(500).json({ error: "Failed to fetch feedback." });
   }
-};
+}
