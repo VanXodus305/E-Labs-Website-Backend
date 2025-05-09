@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: true,
   },
@@ -9,46 +9,28 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  organizer: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     required: true,
   },
-  startDate: {
-    type: String,
-    required: true,
-  },
-  endDate: {
-    type: String,
-    required: true,
-  },
-  time: {
+  date_time: {
     type: String,
     required: true,
   },
   location: {
-    longitude: {
-      type: Number,
-      required: true,
-    },
-    latitude: {
-      type: Number,
-      required: true,
-    },
-  },
-  createdBy: {
     type: String,
     required: true,
-  },
-  createdAt: {
-    type: String,
-    required: true,
-    default: Date.now(),
-  },
-  updatedAt: {
-    type: String,
-    required: true,
-    default: Date.now(),
   },
 });
 
-export const Event = mongoose.model("Event", eventSchema);
+const MongooseSchema = mongoose.model("Event", eventSchema);
+MongooseSchema.collection.getIndexes().then((indexes) => {
+  // console.log("Current indexes for Event collection: ");
+  // console.log(indexes);
+});
+
+export default MongooseSchema;
