@@ -3,7 +3,7 @@ import { Registeration } from "../models/registration.js";
 import { User } from "../models/user.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
-export async function addEvent(req, res) {
+async function addEvent(req, res) {
   const { name, desc, organizer, date_time, location } = req.body;
 
   if (!name || !desc || !organizer || !date_time || !location) {
