@@ -15,6 +15,11 @@ const feedbackSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  date: {
+    type: String,
+    default: () =>
+      new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+  },
   // rating: {
   //   type: Number,
   //   required: true,
