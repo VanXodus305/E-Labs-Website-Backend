@@ -28,7 +28,7 @@ export async function addMember(req, res) {
     const response = await uploadOnCloudinary(file.path);
     const uploadedFilePath = response?.url.replace(
       "/upload/",
-      "/upload/ar_1:1,c_fill,g_auto/"
+      "/upload/ar_1:1,c_auto,g_auto/"
     );
 
     const member = new Member({
